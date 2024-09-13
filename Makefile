@@ -3,6 +3,8 @@
 # Makefile
 #
 #     file responsible for store and run `compile shortcuts`
+#     also run cmds too
+#
 # -------------------------------------------------------------------
 
 # our compile consts
