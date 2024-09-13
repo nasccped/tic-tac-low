@@ -12,7 +12,7 @@ CC        = gcc
 SRC_DIR   = ./src
 OUT_DIR   = ./out
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-FINAL_EXE = $(OUT_DIR)/executable
+FINAL_EXE = $(OUT_DIR)/tic-tac-low
 
 # procedure to generate the exe file
 # build output directory if doesn't exists
