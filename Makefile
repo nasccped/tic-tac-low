@@ -15,8 +15,8 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 FINAL_EXE = $(OUT_DIR)/tic-tac-low
 
 # procedure to generate the exe file
-# build output directory if doesn't exists
-build: $(SRC_FILES)                # source files required
+# build output directory if doesn't exists | source files required
+build: $(SRC_FILES)
 	@if [ ! -d $(OUT_DIR) ]; then \
 		mkdir $(OUT_DIR); \
 	fi
