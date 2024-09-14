@@ -26,7 +26,9 @@ And you can also use our:
 
 <summary style="font-weight: bold">Table of contents 🔬</summary><br>
 
-_Nothing here, yet..._
+- [Makefiles](#makefiles)
+
+  - [gnu make manual](#gnu-make-manual)
 
 </details>
 
@@ -35,4 +37,11 @@ _Nothing here, yet..._
 Content
 -------
 
-_Nothing here, yet..._
+### Makefiles
+
+#### GNU Make Manual
+
+How can I create a variable inside a script block? How can I updated
+it? Why it's so hard? 😭
+
+- https://www.gnu.org/software/make/manual/make.html
