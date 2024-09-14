@@ -29,6 +29,7 @@ And you can also use our:
 - [Makefiles](#makefiles)
 
   - [gnu make manual](#gnu-make-manual)
+  - [conditionals](#conditionals)
 
 </details>
 
@@ -44,4 +45,11 @@ Content
 How can I create a variable inside a script block? How can I updated
 it? Why it's so hard? 😭
 
-- https://www.gnu.org/software/make/manual/make.html
+- [GNU Website](https://www.gnu.org/software/make/manual/make.html)
+
+
+#### Conditionals
+
+By the looks, I need to performe an `ifeq/ifneq` outside a recipe.
+
+- [GNU Website](https://www.gnu.org/software/make/manual/html_node/Conditional-Syntax.html)
