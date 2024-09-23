@@ -10,7 +10,7 @@ relatively low-level technology (C language was chosen 💀)!
 
 ## How to Use?
 
-First things firts, you'll need to check some:
+First things first, you'll need to check some:
 
 
 
