@@ -85,7 +85,7 @@ build: $(SourceFiles)
 		printf "\n"                                                                                       ;      \
 		printf "We $(grnEsc)will build it$(rstEsc) for you!\n\n"                                          ;      \
 	fi                                                                                                  ;
-	@printf "Compilation has been... "                                                                  ;
+	@printf "Compilation status: "                                                                      ;
 	@$(CompileCommand) -c $^ -o $(ObjDir)/$(patsubst %.c,%, $(lastword $(subst /, , $^)))               ;
 	@$(CompileCommand) $(ObjDir)/$(patsubst %.c,%, $(lastword $(subst /, , $<))) -o $(OutDir)/$(ExeName);
 	@printf "$(grnEsc)done!$(rstEsc)\n\n"                                                               ;
