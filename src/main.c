@@ -6,28 +6,31 @@
  *     combination of all tasks
  * ----------------------------------------------------------------*/
 #include <stdio.h>
+#include "mods/headers/inputs.h"
+#include <string.h>
 
 // main function
 int main(int argc, char *argv[]) {
 
   // initialize an empty int variable
-  int number;
+  int  number;
+  char *response;
 
-  /*
-    FIXME: cool block of code. Some kind of question is done,
-           you enter a int type value such as 10, 32, 54, etc...
-           but, if you enter like a char `a`, some bug behaviours
-           occurs
-  */
-  do {
+  printf("Say my name: ");
 
-    printf("Insert a number [1 - 10]: ");
+  response = get_user_response();
 
-    scanf("%d", &number);
+  if (strcmp(response, "Heisenberg") == 0) {
 
-  } while (number > 10 || number < 1);
+    char *sr_white = "\033[1;48;2;67;61;139m\033[1;38;2;249;228;0m";
+    char *rest_inP = "\033[0m";
 
+    printf("\n\n  %s LET HIM COOK %s\n\n", sr_white, rest_inP);
 
+  } else {
+
+    printf("\n\n pooOr namu -_-\n\n");
+  }
 
   return 0;
 }
