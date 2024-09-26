@@ -9,13 +9,17 @@
 
 int main(int argc, char *argv[]) {
 
-  const char *YELLOW_ESCAPE   = "\033[1;43m";
-  const char *RESET_ESCAPE = "\033[0m"   ;
+  int number;
 
-  printf("\t%s Hell %s Weirdo\n",
-         YELLOW_ESCAPE          ,
-         RESET_ESCAPE
-  );
+  do {
+
+    printf("Insert a number [1 - 10]: ");
+
+    scanf("%d", &number);
+
+  } while (number > 10 || number < 1);
+
+
 
   return 0;
 }
