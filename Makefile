@@ -31,24 +31,27 @@ itlEsc = \e[3m
 
 # when the argument isn't passed
 all:
-	@printf "\n"                                                                          ;
-	@printf "Hi there! $(yelEsc)@nasccped$(rstEsc) here 👋\n"                             ;
-	@printf "This is the $(grnEsc)Tic Tac Low$(rstEsc) compile & runner setup!\n"         ;
-	@printf "\n"                                                                          ;
-	@printf "The task is simple:\n"                                                       ;
-	@printf "\n"                                                                          ;
-	@printf "    type $(itlEsc)'make build'$(rstEsc): will compile the source code to a\n";
-	@printf "                       binary/object file\n"                                 ;
-	@printf "\n"                                                                          ;
-	@printf "    type $(itlEsc)'make run'$(rstEsc): will... well... run the generated\n"  ;
-	@printf "                     file\n"                                                 ;
-	@printf "\n"                                                                          ;
-	@printf "    type $(itlEsc)'make clear'$(rstEsc): will remove all the output\n"       ;
-	@printf "                       generated files\n"                                    ;
-	@printf "\n"                                                                          ;
-	@printf "    type $(itlEsc)'make help'$(rstEsc): will display some help options\n"    ;
-	@printf "\n"                                                                          ;
-	@printf  "$(yelEsc)Have fun!$(rstEsc)\n\n"                                            ;
+	@printf "\n"                                                                                      ;
+	@printf "Hi there! $(yelEsc)@nasccped$(rstEsc) here 👋\n"                                         ;
+	@printf "This is the $(grnEsc)Tic Tac Low$(rstEsc) compile & runner setup!\n"                     ;
+	@printf "\n"                                                                                      ;
+	@printf "The task is simple:\n"                                                                   ;
+	@printf ".\n"                                                                                     ;
+	@printf "|-  Type $(itlEsc)$(grnEsc)'make build':$(rstEsc) will compile the source code to\n"     ;
+	@printf "|                      object files\n"                                                   ;
+	@printf "|\n"                                                                                     ;
+	@printf "|-  Type $(itlEsc)$(grnEsc)'make compile':$(rstEsc) will compile the object files to a\n";
+	@printf "|                        final binary\n"                                                 ;
+	@printf "|\n"                                                                                     ;
+	@printf "|-  Type $(itlEsc)$(grnEsc)'make run':$(rstEsc) will... well... run the generated\n"     ;
+	@printf "|                    binary\n"                                                           ;
+	@printf "|\n"                                                                                     ;
+	@printf "|-  Type $(itlEsc)$(grnEsc)'make clear':$(rstEsc) will remove all the output\n"          ;
+	@printf "|                      generated files\n"                                                ;
+	@printf "|\n"                                                                                     ;
+	@printf "|-  Type $(itlEsc)$(grnEsc)'make help':$(rstEsc) will display some help options\n"       ;
+	@printf "\n"                                                                                      ;
+	@printf  "$(yelEsc)Have fun!$(rstEsc)\n\n"                                                        ;
 
 
 
@@ -76,30 +79,49 @@ endif # end conditional ---------------------------------------------
 
 # procedure to generate the exe file
 build: $(SourceFiles) $(ModsFiles)
-	@printf "\n"                                                          ;
-	@if [ ! -z "$(thisOutFolderNotExists)" ]                              ; then \
-		printf "It looks like $(redEsc) you are missing $(rstEsc) some"     ;      \
-		printf " output folders: "                                          ;      \
-		printf "$(itlEsc)"                                                  ;      \
-		printf "< $(thisOutFolderNotExists) >"                              ;      \
-		printf "$(rstEsc)"                                                  ;      \
-		mkdir $(thisOutFolderNotExists)                                     ;      \
-		printf "\n"                                                         ;      \
-		printf "\n"                                                         ;      \
-		printf "We $(grnEsc)will build it$(rstEsc) for you!\n\n"            ;      \
-	fi                                                                    ;
-	@printf "$(yelEsc)Compilation status:$(rstEsc) \n\n"                  ;
-	@for cfile in $^                                                      ; do   \
-		printf "  Compiling $(itlEsc)\"$$cfile\"$(rstEsc): "                ;      \
-		defname="$${cfile##*/}"; defname="$${defname%%.*}"                  ;      \
-		$(CompileCommand) -c $$cfile -o $(ObjDir)/$$defname                 ;      \
-		printf "$(grnEsc)DONE!$(rstEsc)\n"                                  ;      \
-	done                                                                  ;
-	@printf "\n$(yelEsc)Final executable compilation:$(rstEsc) "          ;      \
-	$(CompileCommand) -o $(AbsoluteExeName) $(wildcard $(ObjDir)/*)       ;
-	@printf "\n  Compilation has been $(grnEsc2) finalized! $(rstEsc)\n\n";
-	@printf "Try <$(yelEsc)make run$(rstEsc)> to run the application."    ;
-	@printf "\n\n"                                                        ;
+	@printf "\n"                                                                    ;
+	@if [ ! -z "$(thisOutFolderNotExists)" ]                                        ; then \
+		printf "It looks like $(redEsc) you are missing $(rstEsc) some"               ;      \
+		printf " output folders: "                                                    ;      \
+		printf "$(itlEsc)"                                                            ;      \
+		printf "< $(thisOutFolderNotExists) >"                                        ;      \
+		printf "$(rstEsc)"                                                            ;      \
+		mkdir $(thisOutFolderNotExists)                                               ;      \
+		printf "\n"                                                                   ;      \
+		printf "\n"                                                                   ;      \
+		printf "We $(grnEsc)will build it$(rstEsc) for you!\n\n"                      ;      \
+	fi                                                                              ;
+	@printf "$(yelEsc)Building objects:$(rstEsc) \n\n"                              ;
+	@for cfile in $^                                                                ; do   \
+		printf "  $(grnEsc)- $(rstEsc)$(itlEsc)\"$$cfile\"$(rstEsc) build status: "   ;      \
+		defname="$${cfile##*/}"; defname="$${defname%%.*}"                            ;      \
+		$(CompileCommand) -Wno-fatal-error -c $$cfile -o $(ObjDir)/$$defname          ;      \
+		if ! [ -f $(ObjDir)/$$defname ]                                               ; then \
+			printf "\nThe building target will be $(redEsc) terminated! $(rstEsc)\n\n"  ;      \
+			exit                                                                        ;      \
+		fi                                                                            ;      \
+		printf "$(grnEsc)DONE!$(rstEsc)\n"                                            ;      \
+	done                                                                            ;      \
+	printf "\nType <$(yelEsc)make compile$(rstEsc)> to build the final application.";      \
+	printf "\n\n"                                                                   ;
+
+
+compile:
+	@printf "\n"                                                                                   ;
+	@if [[ -z "$(wildcard $(ObjDir)/*)" ]]                                                         ; then \
+		printf "The $(itlEsc)Object Folder$(rstEsc) $(redEsc) is empty / doesn't exists! $(rstEsc)\n";      \
+		printf "\nUse <$(yelEsc)make build$(rstEsc)> instead...\n"                                   ;      \
+	else                                                                                                  \
+		printf "Final $(itlEsc)'.exe'$(rstEsc) compilation status: $(redEsc)"                        ;      \
+		$(CompileCommand) $(wildcard $(ObjDir)/*) -o $(AbsoluteExeName)                              ;      \
+		if ! [ -f $(AbsoluteExeName) ]                                                               ; then \
+			printf "$(rstEsc)\nTry using <$(yelEsc)make help$(rstEsc)>\n"                              ;      \
+		else                                                                                                \
+			printf "$(rstEsc)$(grnEsc2) SUCCESS! $(rstEsc)\n\n"                                        ;      \
+			printf "Now, type <$(yelEsc)make run$(rstEsc)>\n"                                          ;      \
+		fi                                                                                           ;      \
+	fi                                                                                             ;
+	@printf "\n"
 
 
 # procedure to remove output files
@@ -107,9 +129,10 @@ clear:
 	@printf "\n"                                                                    ;
 	@if [ -d $(OutDir) ]                                                            ; then \
 		rm -r $(OutDir)                                                               ;      \
-		printf "Output folder $(grnEsc) has been removed! $(rstEsc)\n"                ;      \
+		printf "Output folder $(grnEsc2) has been removed! $(rstEsc)\n"               ;      \
 	else                                                                                   \
-		printf "Output folder $(redEsc)was not found.$(rstEsc) Nothing to remove...\n";      \
+		printf "Output folder $(redEsc) was not found! $(rstEsc)\n"                   ;      \
+		printf "\nNothing to remove...\n"                                             ;      \
 	fi                                                                              ;
 	@printf "\n"                                                                    ;
 
@@ -119,14 +142,23 @@ run:
 	@printf "\n"                                                                                                ;
 	@if [ -f $(AbsoluteExeName) ]                                                                               ; then \
 		cd $(OutDir)                                                                                              ;      \
+		if ! [[ -x "$(ExeName)" ]]                                                                                ; then \
+			printf "$(grnEsc)Final exe$(rstEsc) file $(redEsc) can't be executed! $(rstEsc)\n\n"                    ;      \
+			printf "Maybe it's corrupted. Try <$(yelEsc)make help$(rstEsc)> to get the behaviour fix\n\n"           ;      \
+			exit                                                                                                    ;      \
+		fi                                                                                                        ;      \
+		printf "$(yelEsc)$(ExeName)$(rstEsc) is $(grnEsc)ready to run$(rstEsc)... "                               ;      \
+		for i in {4..1}                                                                                           ; do   \
+			printf "$$i "                                                                                           ;      \
+			sleep 1s                                                                                                ;      \
+		done                                                                                                      ;      \
+		printf "\n\n"                                                                                             ;      \
 		./$(ExeName)                                                                                              ;      \
 	else                                                                                                               \
-		printf "$(AbsoluteExeName) file $(redEsc) was not found! $(rstEsc)\n"                                     ;      \
-		printf "You can try:\n"                                                                                   ;      \
-		printf "   - $(grnEsc)make clear$(rstEsc) -> $(grnEsc)make build$(rstEsc) -> $(grnEsc)make run$(rstEsc)\n";      \
-		printf "   - $(grnEsc)make help$(rstEsc)\n"                                                               ;      \
-	fi                                                                                                          ;
-	@printf "\n"                                                                                                ;      \
+		printf "$(grnEsc)Final exe$(rstEsc) file $(redEsc) was not found! $(rstEsc)\n\n"                          ;      \
+		printf "You can try <$(yelEsc)make help$(rstEsc)> to get the behaviour fix\n"                             ;      \
+	fi                                                                                                          ;      \
+	printf "\n"                                                                                                 ;
 
 
 # procedure to show help content
@@ -134,9 +166,10 @@ help:
 	@printf "\nSomething $(redEsc) went wrong? $(rstEsc) Try these steps:\n"                                           ;
 	@printf "\n"                                                                                                       ;
 	@printf "   $(yelEsc)To run the project:$(rstEsc)\n"                                                               ;
-	@printf "      $(grnEsc)1.$(rstEsc) make clear $(itlEsc)(remove output folders, if it exists)$(rstEsc)\n"          ;
-	@printf "      $(grnEsc)2.$(rstEsc) make build $(itlEsc)(rebuild output folders and binaries)$(rstEsc)\n"          ;
-	@printf "      $(grnEsc)3.$(rstEsc) make run   $(itlEsc)(run the builded files)$(rstEsc)\n"                        ;
+	@printf "      $(grnEsc)1.$(rstEsc) make clear   $(itlEsc)(remove output folders, if it exists)$(rstEsc)\n"        ;
+	@printf "      $(grnEsc)2.$(rstEsc) make build   $(itlEsc)(rebuild output folders and objects)$(rstEsc)\n"         ;
+	@printf "      $(grnEsc)3.$(rstEsc) make compile $(itlEsc)(rebuild binary by objects)$(rstEsc)\n"                  ;
+	@printf "      $(grnEsc)4.$(rstEsc) make run     $(itlEsc)(run the final program)$(rstEsc)\n"                      ;
 	@printf "\n"                                                                                                       ;
 	@printf "\n"                                                                                                       ;
 	@printf "   $(yelEsc)Still doesn't work!$(rstEsc)\n"                                                               ;
