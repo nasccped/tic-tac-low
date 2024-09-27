@@ -147,11 +147,8 @@ run:
 			printf "Maybe it's corrupted. Try <$(yelEsc)make help$(rstEsc)> to get the behaviour fix\n\n"           ;      \
 			exit                                                                                                    ;      \
 		fi                                                                                                        ;      \
-		printf "$(yelEsc)$(ExeName)$(rstEsc) is $(grnEsc)ready to run$(rstEsc)... "                               ;      \
-		for i in {4..1}                                                                                           ; do   \
-			printf "$$i "                                                                                           ;      \
-			sleep 1s                                                                                                ;      \
-		done                                                                                                      ;      \
+		printf "$(yelEsc)$(ExeName)$(rstEsc) is $(grnEsc)ready to run!$(rstEsc) "                                 ;      \
+		sleep 2s                                                                                                  ;      \
 		printf "\n\n"                                                                                             ;      \
 		./$(ExeName)                                                                                              ;      \
 	else                                                                                                               \
