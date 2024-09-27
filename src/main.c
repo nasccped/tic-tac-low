@@ -34,5 +34,7 @@ int main(int argc, char *argv[]) {
     printf("\n\n pooOr namu -_-\n\n");
   }
 
+  free(response);
+
   return 0;
 }
