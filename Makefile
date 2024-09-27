@@ -11,6 +11,8 @@
 # our compile consts
 CompileCommand  = gcc
 SourceDir       = ./src
+ModsDir         = ./src/mods
+ModsFiles       = $(wildcard $(ModsDir)/*.c)
 OutDir          = ./out
 ObjDir          = $(OutDir)/objs
 SourceFiles     = $(wildcard $(SourceDir)/*.c)
@@ -23,6 +25,7 @@ RepoUrl         = https://github.com/nasccped/tic-tac-low
 rstEsc = \e[0m
 redEsc = \e[0;41m
 grnEsc = \e[32m
+grnEsc2 = \e[30;42m
 yelEsc = \e[1;33m
 itlEsc = \e[3m
 
@@ -72,23 +75,31 @@ endif # end conditional ---------------------------------------------
 
 
 # procedure to generate the exe file
-build: $(SourceFiles)
-	@printf "\n"                                                                                        ;
-	@if [ ! -z "$(thisOutFolderNotExists)" ]                                                            ; then \
-		printf "It looks like $(redEsc) you are missing $(rstEsc) some"                                   ;      \
-		printf " output folders: "                                                                        ;      \
-		printf "$(itlEsc)"                                                                                ;      \
-		printf "< $(thisOutFolderNotExists) >"                                                            ;      \
-		printf "$(rstEsc)"                                                                                ;      \
-		mkdir $(thisOutFolderNotExists)                                                                   ;      \
-		printf "\n"                                                                                       ;      \
-		printf "\n"                                                                                       ;      \
-		printf "We $(grnEsc)will build it$(rstEsc) for you!\n\n"                                          ;      \
-	fi                                                                                                  ;
-	@printf "Compilation status: "                                                                      ;
-	@$(CompileCommand) -c $^ -o $(ObjDir)/$(patsubst %.c,%, $(lastword $(subst /, , $^)))               ;
-	@$(CompileCommand) $(ObjDir)/$(patsubst %.c,%, $(lastword $(subst /, , $<))) -o $(OutDir)/$(ExeName);
-	@printf "$(grnEsc)done!$(rstEsc)\n\n"                                                               ;
+build: $(SourceFiles) $(ModsFiles)
+	@printf "\n"                                                          ;
+	@if [ ! -z "$(thisOutFolderNotExists)" ]                              ; then \
+		printf "It looks like $(redEsc) you are missing $(rstEsc) some"     ;      \
+		printf " output folders: "                                          ;      \
+		printf "$(itlEsc)"                                                  ;      \
+		printf "< $(thisOutFolderNotExists) >"                              ;      \
+		printf "$(rstEsc)"                                                  ;      \
+		mkdir $(thisOutFolderNotExists)                                     ;      \
+		printf "\n"                                                         ;      \
+		printf "\n"                                                         ;      \
+		printf "We $(grnEsc)will build it$(rstEsc) for you!\n\n"            ;      \
+	fi                                                                    ;
+	@printf "$(yelEsc)Compilation status:$(rstEsc) \n\n"                  ;
+	@for cfile in $^                                                      ; do   \
+		printf "  Compiling $(itlEsc)\"$$cfile\"$(rstEsc): "                ;      \
+		defname="$${cfile##*/}"; defname="$${defname%%.*}"                  ;      \
+		$(CompileCommand) -c $$cfile -o $(ObjDir)/$$defname                 ;      \
+		printf "$(grnEsc)DONE!$(rstEsc)\n"                                  ;      \
+	done                                                                  ;
+	@printf "\n$(yelEsc)Final executable compilation:$(rstEsc) "          ;      \
+	$(CompileCommand) -o $(AbsoluteExeName) $(wildcard $(ObjDir)/*)       ;
+	@printf "\n  Compilation has been $(grnEsc2) finalized! $(rstEsc)\n\n";
+	@printf "Try <$(yelEsc)make run$(rstEsc)> to run the application."    ;
+	@printf "\n\n"                                                        ;
 
 
 # procedure to remove output files
