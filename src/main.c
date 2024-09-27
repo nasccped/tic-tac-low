@@ -5,11 +5,17 @@
  *     file responsible for store the main task and / or the
  *     combination of all tasks
  * ----------------------------------------------------------------*/
-#include <stdio.h>
-#include "mods/headers/inputs.h"
-#include <string.h>
 
-char* get_user_response(void);
+// including only the necessary contents
+#include "mods/headers/_includes.h"
+#include "mods/headers/inputs.h"
+
+
+
+// function declar...
+char* get_user_response(void); // self-explanatory
+
+
 
 // main function
 int main(int argc, char *argv[]) {
