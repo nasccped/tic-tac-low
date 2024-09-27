@@ -36,6 +36,7 @@ And you can also use our:
 - [C Lang](#c-lang)
 
   - [keypress detection](#keypress-detection)
+  - [compile without showing errors](#compile-without-showing-errors)
 
 </details>
 
@@ -84,3 +85,11 @@ an _bash like_ env to run tasks. 🧑‍🔬
 How to detect which key are pressed
 
 - [Youtube Video](https://www.youtube.com/watch?v=FPb1uQUrYQk)
+
+
+#### Compile without showing errors
+
+How can i compile a c file without showing errors. I know... Theres
+a bad idea, but in this way, my Makefile CLI looks cooler xD
+
+- [GNU Website](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html)
