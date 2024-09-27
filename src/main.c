@@ -9,6 +9,8 @@
 #include "mods/headers/inputs.h"
 #include <string.h>
 
+char* get_user_response(void);
+
 // main function
 int main(int argc, char *argv[]) {
 
