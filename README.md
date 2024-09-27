@@ -85,21 +85,19 @@ Let's do this together:
   ```
 
 
-4. Build binaries / objects 🧮
-  - We'll build our binaries by Makefile script
-  - At your terminal, type `make build`. This will:
-    - generate the **out/** dir if it doesn't exist
-    - build objects / exes by the files located at **src/** dir
+4. Have fun!
+  - The program isn't ready to be runned. You can type:
+  ```bash
+  make build
+  make compile
+  make run
+  # the commands above will instantly compile and run the program
+  # but, you can also just use:
 
-
-5. Run the program 🏃
-  - Finally, you can type `make run` to run the program
-  - In a few words, this will do a exe call like:
-  `.out/executable.exe`
-  - If it doesn't work by some reason, you can try:
-    - Go to output directory by typing `cd out`
-    - Run the exe within the **out/** dir: `executable` or
-    `./executable`
+  make
+  # this will display some guide content. We have a `make help` too.
+  # isn't soo important but it can help you through a bug behaviour!
+  ```
 
 
 
