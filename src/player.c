@@ -2,7 +2,9 @@
 #include "./_include_.h"
 #endif
 
+#ifndef _PLAYER_H_
 #include "./mods/player.h"
+#endif
 
 Player *new_player(char *name) {
 
