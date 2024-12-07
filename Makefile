@@ -77,6 +77,7 @@ run:
 				sleep .5                                                ;      \
 			done                                                      ;      \
 			echo                                                      ;      \
+			echo                                                      ;      \
 			$(OUT)/$(FINAL)                                           ;      \
 		fi                                                          ;      \
 	fi                                                            ;
