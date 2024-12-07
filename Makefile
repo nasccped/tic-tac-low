@@ -74,7 +74,7 @@ run:
 			printf "   "                                              ;      \
 			for i in 3 2 1                                            ; do   \
 				printf " $$i"                                           ;      \
-				sleep 1                                                 ;      \
+				sleep .5                                                ;      \
 			done                                                      ;      \
 			echo                                                      ;      \
 			$(OUT)/$(FINAL)                                           ;      \
