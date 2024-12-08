@@ -2,12 +2,13 @@
 #include "./_include_.h"
 #endif
 
+#ifndef _PLAYER_H_
+#include "./mods/player.h"
+#endif
+
 int main(int arc, char *argv[]) {
 
-  char red[] = "\033[1;32m";
-  char none[] = "\033[0m";
-
-  printf("\n%sAyooo%s, World!\n", red, none);
+  test_player();
 
   return 0;
 }
