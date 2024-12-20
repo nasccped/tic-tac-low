@@ -6,7 +6,13 @@
 #include "./mods/player.h"
 #endif
 
+#ifndef _VISUALS_H_
+#include "./mods/visuals.h"
+#endif
+
 int main(int arc, char *argv[]) {
+
+  clear_terminal();
 
   test_player();
 
