@@ -10,6 +10,8 @@
 #include "./mods/visuals.h"
 #endif
 
+bool COLORED_PRINT = false;
+
 int main(int arc, char *argv[]) {
 
   clear_terminal();
