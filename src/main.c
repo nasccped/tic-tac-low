@@ -5,36 +5,24 @@
 #include "./headers/utils.h"
 #include "./headers/visuals.h"
 
+unsigned ENABLE_COLORS;
+
 int main(int argc, char *argv[]) {
 
   clear_terminal();
+
   printf("\n");
 
-  printf("  Welcome to our positive/negative questions!\n");
-  printf("  Answer this with an yes/no:\n");
+  printf("  Enable ANSI basic colors? ( yes / no )\n");
   printf("  > ");
 
-  int answer = yes_or_no_input();
+  int sec;
+  ENABLE_COLORS = ((sec = yes_or_no_input()) == -1) ? 0 : sec;
 
   printf("\n");
-
-  printf("  Your answer value is: ");
-
-  switch (answer) {
-
-  case 1:
-    printf("\x1b[1;32mtrue");
-    break;
-
-  case 0:
-    printf("\x1b[1;31mfalse");
-    break;
-
-  default:
-    printf("\x1b[1;33minvalid");
-  }
-
-  printf("\x1b[0m\n\n");
+  printf("  The program colors is %s\n",
+         (ENABLE_COLORS) ? "\x1b[1;34mENABLED\x1b[0m" : "DISABLED");
+  printf("\n");
 
   return 0;
 }
