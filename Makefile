@@ -13,13 +13,12 @@ YELLOW_ESCAPE=\033[1;33m
 BLUE_ESCAPE=\033[1;34m
 
 define ptf
-	echo "$(1) > $(RESET_ESCAPE)$(2)"
+	echo "$(1) # $(RESET_ESCAPE)$(2)"
 endef
 
 all:
 	@echo                                                                            ;
 	@$(call ptf,$(BLUE_ESCAPE),"Welcome to the Tic-Tac-Low\'s Makefile!")            ;
-	@echo                                                                            ;
 	@$(call ptf,$(BLUE_ESCAPE),"You can use the following options:")                 ;
 	@echo "        |> make build"                                                    ;
 	@echo "        |> make run"                                                      ;
@@ -62,12 +61,10 @@ run:
 	@echo                                                         ;
 	@if ! [ -d $(OUT) ]                                           ; then \
 		$(call ptf,$(RED_ESCAPE),"Output dir not found")            ;      \
-		echo                                                        ;      \
 		$(call ptf,$(YELLOW_ESCAPE),"Use \'make build\' instead")   ;      \
 	else                                                                 \
 		if ! [ -f $(OUT)/$(FINAL) ]                                 ; then \
 			$(call ptf,$(RED_ESCAPE),"Program executable not found!") ;      \
-			echo                                                      ;      \
 			$(call ptf,$(YELLOW_ESCAPE),"Use \'make build\' instead") ;      \
 		else                                                               \
 			$(call ptf,$(GREEN_ESCAPE),"The program is ready to run!");      \
