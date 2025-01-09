@@ -1,25 +1,38 @@
 #include "./headers/__INCLUDE__.H"
 #include "./headers/const_vars.h"
+#include "./headers/utils.h"
 #include "./headers/visuals.h"
 
 int main(int argc, char *argv[]) {
 
-  const char *COLORS[] = {
-      BOLD_RED_NONE,
-      BOLD_GREEN_NONE,
-      BOLD_YELLOW_NONE,
-  };
-
   clear_terminal();
+  printf("\n");
 
-  char *hlwd = "  Hello, World!";
-  size_t len = strlen(hlwd);
+  printf("  Welcome to our positive/negative questions!\n");
+  printf("  Answer this with an yes/no:\n");
+  printf("  > ");
 
-  printf("\n  ");
-  for (int i = 0; i < len; i++) {
-    printf("%s%c", COLORS[i % 3], hlwd[i]);
+  int answer = yes_or_no_input();
+
+  printf("\n");
+
+  printf("  Your answer value is: ");
+
+  switch (answer) {
+
+  case 1:
+    printf("\x1b[1;32mtrue");
+    break;
+
+  case 0:
+    printf("\x1b[1;31mfalse");
+    break;
+
+  default:
+    printf("\x1b[1;33minvalid");
   }
-  printf("%s\n", RESET_ESCAPE);
+
+  printf("\x1b[0m\n\n");
 
   return 0;
 }
