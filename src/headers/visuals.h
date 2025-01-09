@@ -1,5 +1,5 @@
-#ifndef _VISUALS_H_
-#define _VISUALS_H_
+#ifndef _VISUALS_H
+#define _VISUALS_H
 
 void clear_terminal();
 

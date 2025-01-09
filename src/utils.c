@@ -1,18 +1,18 @@
 #include "./headers/utils.h"
 
-#ifndef _STDIO_H_
+#ifndef _STDIO_H
 #include <stdio.h>
 #endif
 
-#ifndef _STRING_H_
+#ifndef _STRING_H
 #include <string.h>
 #endif
 
-#ifndef _CTYPE_H_
+#ifndef _CTYPE_H
 #include <ctype.h>
 #endif
 
-#ifndef _STDLIB_H_
+#ifndef _STDLIB_H
 #include <stdlib.h>
 #endif
 

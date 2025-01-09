@@ -1,5 +1,5 @@
-#ifndef _CONST_VARS_H_
-#define _CONST_VARS_H_
+#ifndef _CONST_VARS_H
+#define _CONST_VARS_H
 
 static const char *RESET_ESCAPE = "\x1b[0m";
 static const char *BOLD_RED_NONE = "\x1b[1;31m";

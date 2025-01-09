@@ -1,5 +1,7 @@
-#include "./headers/__INCLUDE__.H"
-#include "./headers/const_vars.h"
+#ifndef _STDIO_H
+#include <stdio.h>
+#endif
+
 #include "./headers/utils.h"
 #include "./headers/visuals.h"
 

@@ -1,5 +1,5 @@
-#ifndef _UTILS_H_
-#define _UTILS_H_
+#ifndef _UTILS_H
+#define _UTILS_H
 
 // logic utils
 int yes_or_no_input();
