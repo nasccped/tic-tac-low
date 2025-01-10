@@ -14,10 +14,6 @@
 #include "./headers/game_options.h"
 #endif
 
-#ifndef _STRING_H
-#include <string.h>
-#endif
-
 #ifndef _TESTS_H
 #include "./headers/tests.h"
 #endif
