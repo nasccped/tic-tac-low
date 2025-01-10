@@ -16,16 +16,17 @@ struct ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
 };
 
-void TEST_FUNC() {
+void TABLE_FUNC() {
 
-  printf("Testing...");
+  printf("  Let's print some tables?\n");
+
 }
 
 int main_test(char *arg) {
   
   struct ArgMapping *map = &ARG_MAPPING;
 
-  map -> append(map, &TEST);
+  map -> append(map, &TABLE);
 
   struct LinkedHashMap *holder = map -> head;
 

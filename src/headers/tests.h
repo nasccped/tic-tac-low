@@ -17,11 +17,11 @@ struct ArgMapping {
 
 void append_lhm(struct ArgMapping *, struct LinkedHashMap *);
 
-void TEST_FUNC();
-static struct LinkedHashMap TEST = {
-  "test",
-  &TEST_FUNC,
-  &TEST
+void TABLE_FUNC();
+static struct LinkedHashMap TABLE = {
+  "table",
+  &TABLE_FUNC,
+  &TABLE,
 };
 
 extern struct ArgMapping ARG_MAPPING;
