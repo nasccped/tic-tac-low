@@ -10,8 +10,8 @@
 #include "./headers/utils.h"
 #endif
 
-#ifndef _GAME_OPTIONS_H
-#include "./headers/game_options.h"
+#ifndef _OPTIONS_H
+#include "./headers/options.h"
 #endif
 
 #ifndef _TESTS_H
