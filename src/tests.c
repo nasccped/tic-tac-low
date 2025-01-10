@@ -12,13 +12,29 @@
 #include <string.h>
 #endif
 
+#ifndef _TABLE_H
+#include "./headers/game/table.h"
+#endif
+
 struct ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
 };
 
 void TABLE_FUNC() {
 
+  printf("\n");
   printf("  Let's print some tables?\n");
+  printf("  Take a look to our pretty table:\n");
+  printf("\n");
+
+
+  for (int i = 0; i < 3; i++) {
+    printf("  ");
+    for (int j = 0; j < 3; j++) {
+      printf("%d ", MAIN_TABLE.table_literal[i][j]);
+    }
+    printf("\n");
+  }
 
 }
 
