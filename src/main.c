@@ -28,12 +28,16 @@ int main(int argc, char *argv[]) {
   // max args that can be received: 1
   if ((argc - 1) > 1) {
 
+    // printting unexpected arg count
     printf("\n");
     printf("  Unexpected args being received (count: %d)\n", argc - 1);
+
+    // printting each arg
     for (int i = 1; i < argc; i++) {
       printf("  . %s\n", argv[i]);
     }
 
+    // max argc count hint
     printf("\n");
     printf("  Maximum expected: 1\n");
     printf("\n");
@@ -41,8 +45,10 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  // if arg count is exatcly 1 (expected)
   if ((argc - 1) == 1) {
 
+    // call test function, then return
     main_test(argv[1]);
     return 0;
   }
