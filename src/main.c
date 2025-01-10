@@ -18,6 +18,10 @@
 #include <string.h>
 #endif
 
+#ifndef _TESTS_H
+#include "./headers/tests.h"
+#endif
+
 unsigned ENABLE_COLORS;
 
 void test();
@@ -25,8 +29,25 @@ void test();
 // main function
 int main(int argc, char *argv[]) {
 
-  if (argc == 2 && (strcmp(argv[1], "test") == 0)) {
-    test();
+  // max args that can be received: 1
+  if ((argc - 1) > 1) {
+
+    printf("\n");
+    printf("  Unexpected args being received (count: %d)\n", argc - 1);
+    for (int i = 1; i < argc; i++) {
+      printf("  . %s\n", argv[i]);
+    }
+
+    printf("\n");
+    printf("  Maximum expected: 1\n");
+    printf("\n");
+
+    return 1;
+  }
+
+  if ((argc - 1) == 1) {
+
+    main_test(argv[1]);
     return 0;
   }
 
