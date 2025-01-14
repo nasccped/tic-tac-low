@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "./headers/visuals.h"
-#include "./headers/const_vars.h"
+#include "../include/visuals.h"
+#include "../include/const_vars.h"
 
 void clear_terminal() { printf("\x1b[2J\x1b[H"); }
 

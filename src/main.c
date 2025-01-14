@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "./headers/visuals.h"
-#include "./headers/utils.h"
-#include "./headers/options.h"
-#include "./headers/tests.h"
+#include "../include/visuals.h"
+#include "../include/utils.h"
+#include "../include/options.h"
+#include "../include/tests.h"
 
 unsigned ENABLE_COLORS;
 

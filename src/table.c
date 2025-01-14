@@ -1,4 +1,4 @@
-#include "./headers/game/table.h"
+#include "../include/game/table.h"
 
 int check_for_victory(struct Table *self) {
 

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "./headers/utils.h"
+#include "../include/utils.h"
 
 int is_alpha_str(char *from) {
 
