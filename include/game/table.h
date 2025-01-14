@@ -1,16 +1,21 @@
 #ifndef _TABLE_H
 #define _TABLE_H
 
+#ifndef _PLAYER_H
+#include "./player.h"
+#endif
+
 struct Table {
   unsigned table_literal[3][3]             ;
   int  (*check_for_victory)(struct Table *);
   void (*reset_table      )(struct Table *);
+  int  (*change_on_table  )(struct Table * ,
+                            struct CatchPlayerMove *);
 };
 
 int  check_for_victory(struct Table *);
 void reset_table(struct Table *);
-struct CatchPlayerMove *player_move(struct CatchPlayerMove *, unsigned, unsigned);
-int change_on_table(struct Table *, struct CatchPlayerMove *);
+int  change_on_table(struct Table *, struct CatchPlayerMove *);
 
 static struct Table MAIN_TABLE = {
   {
@@ -20,6 +25,7 @@ static struct Table MAIN_TABLE = {
   },
   &check_for_victory,
   &reset_table,
+  &change_on_table
 };
 
 #endif
