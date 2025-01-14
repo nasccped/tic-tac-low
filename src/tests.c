@@ -48,6 +48,29 @@ void TABLE_FUNC() {
   }
 }
 
+void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
+
+  if (self == NULL || element == NULL)
+    return;
+
+  element -> next = NULL;
+
+  if (self -> count == 0) {
+    self -> head = element;
+    self -> count++;
+    return;
+  }
+
+  struct LinkedHashMap *hold  = self -> head;
+
+  for (int i = 0; i < self -> count; i++) {
+    hold = hold -> next;
+  }
+
+  hold -> next = element;
+  self -> count++;
+}
+
 int main_test(char *arg) {
   
   struct ArgMapping *map = &ARG_MAPPING;
@@ -75,27 +98,4 @@ int main_test(char *arg) {
   printf("\n");
 
   return 1;
-}
-
-void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
-
-  if (self == NULL || element == NULL)
-    return;
-
-  element -> next = NULL;
-
-  if (self -> count == 0) {
-    self -> head = element;
-    self -> count++;
-    return;
-  }
-
-  struct LinkedHashMap *hold  = self -> head;
-
-  for (int i = 0; i < self -> count; i++) {
-    hold = hold -> next;
-  }
-
-  hold -> next = element;
-  self -> count++;
 }
