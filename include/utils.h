@@ -3,6 +3,7 @@
 
 // logic utils
 int yes_or_no_input();
+int is_num(char *, unsigned);
 
 // char* (string) manipulation
 int is_alpha_str(char *);

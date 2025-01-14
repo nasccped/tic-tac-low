@@ -18,6 +18,19 @@ int is_alpha_str(char *from) {
   return 1;
 }
 
+int is_num(char *string, unsigned str_len) {
+
+  for (int i = 0; i < str_len; i++) {
+    if (string[i] == '\0' || string[i] == '\n')
+      break;
+
+    if (string[i] < '0' || string[i] > '9')
+      return 0;
+  }
+
+  return 1;
+}
+
 void str_to_lower(char *dest) {
 
   unsigned len = strlen(dest);
