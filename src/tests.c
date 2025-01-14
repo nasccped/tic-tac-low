@@ -23,16 +23,39 @@ struct ArgMapping ARG_MAPPING = {
 void TABLE_FUNC() {
 
   printf("\n");
-  printf("  Let's print some tables?\n");
-  printf("  Take a look to our pretty table:\n");
+  printf("  Let's run some table checking tests\n\n");
   printf("\n");
 
+  struct Table *table_collec[] = {
+    &tab_test1,
+    &tab_test2,
+    &tab_test3,
+    &tab_test4,
+  };
+  
+  int expected_result[4] = {
+    1,
+    2,
+    0,
+    -1
+  };
 
-  for (int i = 0; i < 3; i++) {
-    printf("  ");
-    for (int j = 0; j < 3; j++) {
-      printf("%d ", MAIN_TABLE.table_literal[i][j]);
-    }
+  int results[4];
+
+  for (int i = 0; i < 4; i++) {
+
+    results[i] = table_collec[i] -> check_for_victory(table_collec[i]);
+  }
+
+  for (int i = 0; i < 4; i++) {
+
+    printf("  Testing nº%d\n", i + 1);
+    printf("  Expected result: %d\n", expected_result[i]);
+    printf("  Founded result: %d\n", results[i]);
+
+    if (i < 3)
+      printf("\n  ---------------------------------\n");
+
     printf("\n");
   }
 

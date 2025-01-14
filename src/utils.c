@@ -16,6 +16,10 @@
 #include <stdlib.h>
 #endif
 
+#ifndef _TABLE_H
+#include "./headers/game/table.h"
+#endif
+
 int is_alpha_str(char *from) {
 
   unsigned len = strlen(from);
