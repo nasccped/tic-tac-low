@@ -8,7 +8,9 @@ struct Table {
 };
 
 int  check_for_victory(struct Table *);
-void reset_table      (struct Table *);
+void reset_table(struct Table *);
+struct CatchPlayerMove *player_move(struct CatchPlayerMove *, unsigned, unsigned);
+int change_on_table(struct Table *, struct CatchPlayerMove *);
 
 static struct Table MAIN_TABLE = {
   {

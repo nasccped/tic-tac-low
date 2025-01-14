@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include "../include/game/table.h"
+#include <stdio.h>
+#include "../include/game/player.h"
 
 int check_for_victory(struct Table *self) {
 
@@ -67,4 +69,66 @@ void reset_table(struct Table *self) {
     for (int j = 0; j < 3; j++)
       self -> table_literal[i][j] = 0;
   }
+}
+
+int change_on_table(struct Table *self, struct CatchPlayerMove *catch_pmove) {
+
+  if (self == NULL)
+    return 0;
+
+  if (catch_pmove == NULL)
+    return 0;
+
+  unsigned row = catch_pmove -> at_row    ,
+           col = catch_pmove -> at_col    ,
+           val = catch_pmove -> player_val;
+
+  if (row > 2 || row < 0)
+    return 0;
+
+  if (col > 2 || col < 0)
+    return 0;
+
+  if (val < 1 || val > 2)
+    return 0;
+
+  if (self -> table_literal[row][col] != 0)
+    return 0;
+
+  self -> table_literal[row][col] = val;
+  return 1;
+}
+
+struct CatchPlayerMove *player_move(struct CatchPlayerMove *dest, unsigned int player, unsigned pos) {
+
+  if (pos < 1 || pos > 9)
+    return NULL;
+
+  if (player < 1 || player > 2)
+    return NULL;
+
+  if (dest == NULL)
+    return NULL;
+
+  unsigned row = 2,
+           col = 0;
+
+  for (int i = 0; i < (pos - 1); i++) {
+
+    if (col == 2) {
+
+      row--;
+      col = 0;
+
+      continue;
+    }
+
+    col++;
+  }
+  
+  dest -> at_col     = col   ;
+  dest -> at_row     = row   ;
+  dest -> player_val = player;
+
+  return dest;
 }
