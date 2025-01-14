@@ -1,6 +1,10 @@
+#include <stdlib.h>
 #include "../include/game/table.h"
 
 int check_for_victory(struct Table *self) {
+
+  if (self == NULL)
+    return -1;
 
   unsigned a, b, c;
 
