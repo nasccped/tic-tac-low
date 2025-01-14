@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../include/tests.h"
 #include "../include/game/player.h"
-#include "../include/game/player.h"
+#include "../include/utils.h"
 
 struct ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
@@ -50,7 +50,45 @@ void TABLE_FUNC() {
 
 void TAKE_POS_FUNC() {
 
-  printf("Let's take the position\n");
+  char val_holder[30];
+
+  int val     ,
+      row = -1,
+      col = -1;
+
+  while (1) {
+
+    printf("\x1b[2J\x1b[H");
+
+    printf("\n");
+    printf("  row: %c | col: %c\n\n", row == -1 ? '?' : '0' + row,
+                                      col == -1 ? '?' : '0' + col);
+
+    printf("  Chose a pos by num keyboard (0 to quit): ");
+    fgets(val_holder, 29, stdin);
+
+    if (!is_num(val_holder, 30)) {
+      row = -1;
+      col = -1;
+      continue;
+    }
+
+    val = atoi(val_holder);
+
+    if (val == 0)
+      break;
+
+    if (CATCH_PLAYER_MOVE.get_move(&CATCH_PLAYER_MOVE,
+                                   1                 ,
+                                   val               ) == NULL) {
+      row = -1;
+      col = -1;
+      continue;
+    }
+
+    row = CATCH_PLAYER_MOVE.at_row;
+    col = CATCH_PLAYER_MOVE.at_col;
+  }
 
 }
 
