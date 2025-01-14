@@ -3,6 +3,7 @@
 #include <string.h>
 #include "../include/tests.h"
 #include "../include/game/table.h"
+#include "../include/game/player.h"
 
 struct ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
@@ -14,39 +15,37 @@ void TABLE_FUNC() {
   printf("  Let's run some table checking tests\n\n");
   printf("\n");
 
-  struct Table *table_collec[] = {
-    &tab_test1,
-    &tab_test2,
-    &tab_test3,
-    &tab_test4,
-  };
-  
-  int expected_result[4] = {
-    1,
-    2,
-    0,
-    -1
-  };
+  unsigned r, c;
 
-  int results[4];
+  for (int v = 1; v <= 9; v++) {
 
-  for (int i = 0; i < 4; i++) {
+    player_move(&CATCH_PLAYER_MOVE, 1, v);
 
-    results[i] = table_collec[i] -> check_for_victory(table_collec[i]);
-  }
+    r = CATCH_PLAYER_MOVE.at_row;
+    c = CATCH_PLAYER_MOVE.at_col;
 
-  for (int i = 0; i < 4; i++) {
+    printf("  Current player move:\n");
 
-    printf("  Testing nº%d\n", i + 1);
-    printf("  Expected result: %d\n", expected_result[i]);
-    printf("  Founded result: %d\n", results[i]);
+    for (int i = 0; i < 3; i++) {
 
-    if (i < 3)
-      printf("\n  ---------------------------------\n");
+      if (i == 1)
+        printf("  > val: %d  ", v);
+      else
+        printf("            ");
 
+      for (int j = 0; j < 3; j++) {
+
+        if (r == i && c == j)
+          printf("X ");
+        else
+          printf("_ ");
+
+      }
+
+      printf("\n");
+    }
     printf("\n");
   }
-
 }
 
 int main_test(char *arg) {
