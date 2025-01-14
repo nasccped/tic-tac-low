@@ -1,8 +1,5 @@
 #include "./headers/game/table.h"
 
-#include <stdio.h>
-
-
 int check_for_victory(struct Table *self) {
 
   unsigned a, b, c;

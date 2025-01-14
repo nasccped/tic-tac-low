@@ -1,12 +1,6 @@
-#include "./headers/visuals.h"
-
-#ifndef _STDIO_H
 #include <stdio.h>
-#endif
-
-#ifndef _CONST_VARS_H
+#include "./headers/visuals.h"
 #include "./headers/const_vars.h"
-#endif
 
 void clear_terminal() { printf("\x1b[2J\x1b[H"); }
 

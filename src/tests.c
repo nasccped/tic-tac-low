@@ -1,20 +1,8 @@
-#include "./headers/tests.h"
-
-#ifndef _STDLIB_H
 #include <stdlib.h>
-#endif
-
-#ifndef _STDIO_H
 #include <stdio.h>
-#endif
-
-#ifndef _STRING_H
 #include <string.h>
-#endif
-
-#ifndef _TABLE_H
+#include "./headers/tests.h"
 #include "./headers/game/table.h"
-#endif
 
 struct ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm

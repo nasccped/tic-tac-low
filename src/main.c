@@ -1,22 +1,8 @@
-#ifndef _STDIO_H
 #include <stdio.h>
-#endif
-
-#ifndef _VISUALS_H
 #include "./headers/visuals.h"
-#endif
-
-#ifndef _UTILS_H
 #include "./headers/utils.h"
-#endif
-
-#ifndef _OPTIONS_H
 #include "./headers/options.h"
-#endif
-
-#ifndef _TESTS_H
 #include "./headers/tests.h"
-#endif
 
 unsigned ENABLE_COLORS;
 
