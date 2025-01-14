@@ -6,8 +6,6 @@
 
 unsigned ENABLE_COLORS;
 
-void test();
-
 // main function
 int main(int argc, char *argv[]) {
 
@@ -70,11 +68,4 @@ int main(int argc, char *argv[]) {
   print_options(ENABLE_COLORS, MENU_OPTIONS);
 
   return 0;
-}
-
-void test() {
-
-  printf("\n");
-  printf("  This is the current test function.   xD\n");
-  printf("\n");
 }
