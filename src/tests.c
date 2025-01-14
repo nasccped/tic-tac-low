@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/tests.h"
-#include "../include/game/table.h"
+#include "../include/game/player.h"
 #include "../include/game/player.h"
 
 struct ArgMapping ARG_MAPPING = {
@@ -19,7 +19,7 @@ void TABLE_FUNC() {
 
   for (int v = 1; v <= 9; v++) {
 
-    player_move(&CATCH_PLAYER_MOVE, 1, v);
+    set_player_move(&CATCH_PLAYER_MOVE, 1, v);
 
     r = CATCH_PLAYER_MOVE.at_row;
     c = CATCH_PLAYER_MOVE.at_col;
@@ -48,6 +48,12 @@ void TABLE_FUNC() {
   }
 }
 
+void TAKE_POS_FUNC() {
+
+  printf("Let's take the position\n");
+
+}
+
 void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
@@ -63,7 +69,7 @@ void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
 
   struct LinkedHashMap *hold  = self -> head;
 
-  for (int i = 0; i < self -> count; i++) {
+  for (int i = 0; i < (self -> count) - 1; i++) {
     hold = hold -> next;
   }
 
@@ -75,7 +81,8 @@ int main_test(char *arg) {
   
   struct ArgMapping *map = &ARG_MAPPING;
 
-  map -> append(map, &TABLE);
+  map -> append(map, &TABLE   );
+  map -> append(map, &TAKE_POS);
 
   struct LinkedHashMap *holder = map -> head;
 
