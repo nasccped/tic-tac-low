@@ -9,6 +9,6 @@ int is_num(char *, unsigned);
 int is_alpha_str(char *);
 void str_to_lower(char *);
 char *strip(char *, unsigned);
-char *input(char *, char *, unsigned);
+char *p_input(char *, char *, unsigned);
 
 #endif

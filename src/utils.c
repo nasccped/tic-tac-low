@@ -108,7 +108,7 @@ int yes_or_no_input() {
     return -1;
 }
 
-char *input(char *prompt, char *store_at, unsigned max_buf) {
+char *p_input(char *prompt, char *store_at, unsigned max_buf) {
 
   if (store_at == NULL)
     return NULL;
