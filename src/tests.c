@@ -1,9 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "../include/visuals.h"
+#include "../include/game/table.h"
 #include "../include/tests.h"
 #include "../include/game/player.h"
 #include "../include/utils.h"
+#include "../include/const_vars.h"
 
 ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
@@ -98,6 +101,71 @@ void CHANGE_TABLE_FUNC() {
   printf("  Can we change some tables?\n");
   printf("\n");
 
+  Table           *table  = &MAIN_TABLE       ;
+  CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
+
+  int target_pos                                         ,
+      table_situation = table -> check_for_victory(table);
+
+  char input[INPUT_MAX_LEN]        ,
+       alert[40] = "Awaiting input";
+
+  while (1) {
+
+    clear_terminal();
+
+    printf("\n");
+    printf("  Alert: %s\n", alert);
+    printf("  ------------------\n");
+
+    for (int i = 0; i < 3; i++) {
+      printf("      ");
+
+      for (int j = 0; j < 3; j++)
+        printf("%c ", table -> table_literal[i][j] == 0 ? '-' : 'X');
+
+      printf("\n");
+    }
+
+    printf("\n");
+
+    if (table_situation == 1) {
+      printf("  Player 1 wins!\n");
+      break;
+    }
+
+    if (p_input("  Give some number ('quit!' to stop): ",
+                input                               ,
+                INPUT_MAX_LEN                       ) == NULL) {
+      printf("  Your input has been returned NULL\n");
+      break;
+    }
+
+    if (strcmp(input, "quit!") == 0) {
+      printf("  Quitting...");
+      break;
+    }
+
+    if (!is_num(input, strlen(input))) {
+      strcpy(alert, "Given value isn't a numeric (1..9)");
+      continue;
+    }
+
+    target_pos = atoi(input);
+
+    if (p_move -> get_move(p_move, 1, target_pos) == NULL) {
+      strcpy(alert, "Your input is out of range (1..9)");
+      continue;
+    }
+
+    if (!table -> change_on_table(table, p_move)) {
+      strcpy(alert, "This pos is already taken");
+      continue;
+    }
+
+    strcpy(alert, "Awaiting input");
+    table_situation = table -> check_for_victory(table);
+  }
 }
 
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
