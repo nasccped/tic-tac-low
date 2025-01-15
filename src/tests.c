@@ -92,6 +92,14 @@ void TAKE_POS_FUNC() {
 
 }
 
+void CHANGE_TABLE_FUNC() {
+
+  printf("\n");
+  printf("  Can we change some tables?\n");
+  printf("\n");
+
+}
+
 void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
@@ -119,8 +127,9 @@ int main_test(char *arg) {
   
   struct ArgMapping *map = &ARG_MAPPING;
 
-  map -> append(map, &TABLE   );
-  map -> append(map, &TAKE_POS);
+  map -> append(map, &TABLE       );
+  map -> append(map, &TAKE_POS    );
+  map -> append(map, &CHANGE_TABLE);
 
   struct LinkedHashMap *holder = map -> head;
 
