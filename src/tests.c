@@ -5,7 +5,7 @@
 #include "../include/game/player.h"
 #include "../include/utils.h"
 
-struct ArgMapping ARG_MAPPING = {
+ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
 };
 
@@ -100,7 +100,7 @@ void CHANGE_TABLE_FUNC() {
 
 }
 
-void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
+void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
     return;
@@ -113,7 +113,7 @@ void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
     return;
   }
 
-  struct LinkedHashMap *hold  = self -> head;
+  LinkedHashMap *hold  = self -> head;
 
   for (int i = 0; i < (self -> count) - 1; i++) {
     hold = hold -> next;
@@ -125,13 +125,13 @@ void append_lhm(struct ArgMapping *self, struct LinkedHashMap *element) {
 
 int main_test(char *arg) {
   
-  struct ArgMapping *map = &ARG_MAPPING;
+  ArgMapping *map = &ARG_MAPPING;
 
   map -> append(map, &TABLE       );
   map -> append(map, &TAKE_POS    );
   map -> append(map, &CHANGE_TABLE);
 
-  struct LinkedHashMap *holder = map -> head;
+  LinkedHashMap *holder = map -> head;
 
   printf("\n");
 
