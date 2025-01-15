@@ -139,7 +139,16 @@ int main_test(char *arg) {
     holder = holder -> next;
   }
 
-  printf("The given arg (%s) could not be found!", arg);
+  holder = map -> head;
+
+  printf("  The given arg (%s) could not be found!\n", arg);
+  printf("  Available args are: \n");
+
+  for (int i = 0; i < (map -> count); i++) {
+    printf("    > %s\n", holder -> arg);
+    holder = holder -> next;
+  }
+
   printf("\n");
 
   return 1;
