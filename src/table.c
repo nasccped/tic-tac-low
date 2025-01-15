@@ -2,7 +2,7 @@
 #include "../include/game/table.h"
 #include "../include/game/player.h"
 
-int check_for_victory(struct Table *self) {
+int check_for_victory(Table *self) {
 
   if (self == NULL)
     return -1;
@@ -62,7 +62,7 @@ int check_for_victory(struct Table *self) {
   return (still_runing) ? -1 : 0;
 }
 
-void reset_table(struct Table *self) {
+void reset_table(Table *self) {
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++)
@@ -70,7 +70,7 @@ void reset_table(struct Table *self) {
   }
 }
 
-int change_on_table(struct Table *self, struct CatchPlayerMove *catch_pmove) {
+int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
 
   if (self == NULL)
     return 0;

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "../include/game/player.h"
 
-struct CatchPlayerMove *set_player_move(struct CatchPlayerMove *dest, unsigned int player, unsigned pos) {
+struct CatchPlayerMove *set_player_move(CatchPlayerMove *dest, unsigned int player, unsigned pos) {
 
   if (pos < 1 || pos > 9)
     return NULL;
