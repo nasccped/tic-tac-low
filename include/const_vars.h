@@ -1,6 +1,8 @@
 #ifndef _CONST_VARS_H
 #define _CONST_VARS_H
 
+#define INPUT_MAX_LEN 50
+
 static const char *RESET_ESCAPE     = "\x1b[0m"   ,
                   *BOLD_RED_NONE    = "\x1b[1;31m",
                   *BOLD_GREEN_NONE  = "\x1b[1;32m",
