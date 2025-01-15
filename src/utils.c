@@ -107,3 +107,21 @@ int yes_or_no_input() {
   else
     return -1;
 }
+
+char *input(char *prompt, char *store_at, unsigned max_buf) {
+
+  if (store_at == NULL)
+    return NULL;
+
+  if (max_buf < 1)
+    return NULL;
+
+  printf("%s", prompt == NULL ? "" : prompt);
+
+  fgets(store_at, max_buf, stdin);
+
+  unsigned len = strlen(store_at);
+  store_at[len - 1] = '\0';
+
+  return store_at;
+}
