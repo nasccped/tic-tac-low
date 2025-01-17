@@ -20,6 +20,7 @@ void append_lhm(struct ArgMapping *, struct LinkedHashMap *);
 void TABLE_FUNC();
 void TAKE_POS_FUNC();
 void CHANGE_TABLE_FUNC();
+void PVP_GAME_FUNC();
 
 static LinkedHashMap TABLE = {
   "table",
@@ -37,6 +38,12 @@ static LinkedHashMap CHANGE_TABLE = {
   "change_table",
   &CHANGE_TABLE_FUNC,
   &CHANGE_TABLE
+};
+
+static LinkedHashMap PVP_GAME = {
+  "pvp_game",
+  &PVP_GAME_FUNC,
+  &PVP_GAME
 };
 
 extern ArgMapping ARG_MAPPING;

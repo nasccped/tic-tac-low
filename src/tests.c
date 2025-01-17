@@ -168,6 +168,14 @@ void CHANGE_TABLE_FUNC() {
   }
 }
 
+void PVP_GAME_FUNC() {
+
+  printf("\n");
+  printf("  Let's play a game?\n");
+  printf("\n");
+
+}
+
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
@@ -198,6 +206,7 @@ int main_test(char *arg) {
   map -> append(map, &TABLE       );
   map -> append(map, &TAKE_POS    );
   map -> append(map, &CHANGE_TABLE);
+  map -> append(map, &PVP_GAME    );
 
   LinkedHashMap *holder = map -> head;
 
