@@ -97,10 +97,6 @@ void TAKE_POS_FUNC() {
 
 void CHANGE_TABLE_FUNC() {
 
-  printf("\n");
-  printf("  Can we change some tables?\n");
-  printf("\n");
-
   Table           *table  = &MAIN_TABLE       ;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
 
@@ -173,6 +169,7 @@ void PVP_GAME_FUNC() {
   printf("\n");
   printf("  Let's play a game?\n");
   printf("\n");
+
 
 }
 
