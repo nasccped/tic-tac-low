@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "../include/game/table.h"
 #include "../include/game/player.h"
+#include <stdio.h>
 
 int check_for_victory(Table *self) {
 
@@ -96,4 +97,43 @@ int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
 
   self -> table_literal[row][col] = val;
   return 1;
+}
+
+void draw_table(Table *self, int enable_colors) {
+
+  const unsigned symbol_y_len = 12;
+
+  char *p1_symbol[] = {
+    R"(                 )",
+    R"(_____      _____ )",
+    R"(\    \    /    / )",
+    R"( \    \  /    /  )",
+    R"(  \____\/____/   )",
+    R"(  /    /\    \   )",
+    R"( /    /  \    \  )",
+    R"(/____/ /\ \____\ )",
+    R"(|    |/  \|    | )",
+    R"(|____|    |____| )",
+    R"(  \(        )/   )",
+    R"(   '        '    )"
+  },
+       *p2_symbol[] = {
+    R"(        _____    )",
+    R"(   ____|\    \   )",
+    R"(  /     /\    \  )",
+    R"( /     /  \    \ )",
+    R"(|     |    |    |)",
+    R"(|     |    |    |)",
+    R"(|\     \  /    /|)",
+    R"(| \_____\/____/ |)",
+    R"( \ |    ||    | /)",
+    R"(  \|____||____|/ )",
+    R"(     \(    )/    )",
+    R"(      '    '     )"
+  };
+
+  for (int i = 0; i < symbol_y_len; i++) {
+    printf("   %s   %s\n", p1_symbol[i], p2_symbol[i]);
+  }
+
 }

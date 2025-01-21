@@ -11,11 +11,13 @@ typedef struct Table {
   void (*reset_table      )(struct Table *);
   int  (*change_on_table  )(struct Table * ,
                             struct CatchPlayerMove *);
+  void (*draw_table       )(struct Table *, int     );
 } Table;
 
 int  check_for_victory(struct Table *);
 void reset_table(struct Table *);
 int  change_on_table(struct Table *, struct CatchPlayerMove *);
+void draw_table(struct Table *, int);
 
 static Table MAIN_TABLE = {
   {
@@ -25,7 +27,8 @@ static Table MAIN_TABLE = {
   },
   &check_for_victory,
   &reset_table,
-  &change_on_table
+  &change_on_table,
+  &draw_table
 };
 
 #endif
