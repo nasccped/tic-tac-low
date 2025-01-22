@@ -130,6 +130,20 @@ void draw_table(Table *self, int enable_colors) {
     R"(  \|____||____|/ )",
     R"(     \(    )/    )",
     R"(      '    '     )"
+  },
+    *empty_symbol[] = {
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )",
+    R"(                 )"
   };
 
   for (int i = 0; i < symbol_y_len; i++) {
