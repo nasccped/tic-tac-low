@@ -10,11 +10,11 @@ void print_banner(unsigned enable_colors) {
   char cur;
 
   printf("\n");
-  printf("  ");
+  printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
   for (int i = 0; i < row_len - 10; i++)
     printf("-");
 
-  printf("\n");
+  printf("%s\n", enable_colors ? RESET_ESCAPE : "");
 
   for (int i = 0; i < BANNER_ROW_COUNT; i++) {
 
@@ -26,15 +26,15 @@ void print_banner(unsigned enable_colors) {
 
       switch (cur) {
 
-        case '0':
+        case '1':
           printf("%s", enable_colors ? BOLD_RED_NONE : "");
           break;
 
-        case '1':
+        case '2':
           printf("%s", enable_colors ? BOLD_GREEN_NONE : "");
           break;
 
-        case '2':
+        case '3':
           printf("%s", enable_colors ? BOLD_YELLOW_NONE : "");
           break;
 
@@ -47,10 +47,10 @@ void print_banner(unsigned enable_colors) {
   printf("%s", enable_colors ? RESET_ESCAPE : "");
 
   printf("\n");
-  printf("  ");
+  printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
   for (int i = 0; i < row_len - 10; i++)
     printf("-");
-  printf("\n");
+  printf("%s\n", enable_colors ? RESET_ESCAPE : "");
 }
 
 void print_options(unsigned enable_colors, const char *options[]) {
