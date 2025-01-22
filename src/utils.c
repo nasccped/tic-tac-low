@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../include/utils.h"
 
 int is_alpha_str(char *from) {
@@ -144,4 +145,11 @@ void simple_table_print(Table *self) {
     }
     printf("\n");
   }
+}
+
+int chose_random_int(int *int_array, unsigned array_len) {
+
+  srand(time(NULL));
+
+  return int_array[rand() % array_len];
 }
