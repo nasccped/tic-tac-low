@@ -2,6 +2,7 @@
 #include "../include/game/table.h"
 #include "../include/const_vars.h"
 #include "../include/visuals.h"
+#include "../include/utils.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -91,32 +92,22 @@ void player_vs_player_game() {
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
   GameMessage     *gm_msg = &MAIN_GAME_MESSAGE;
 
-  struct gm_msg_pair {
-    MessageType type   ;
-    char       *message;
-  };
+  int playing = 1;
 
-  struct gm_msg_pair pairs[] = {
+  while (1) {
 
-    { OK_AWAITING     , "Hi there... I'm waiting for your move!" },
-    { OK_WINS         , "Player 1 wins!"                         },
-    { OK_BREAK_EVEN   , "You both break even"                    },
-    { ERR_NON_NUMERIC , "Your input isn't a numeric value"       },
-    { ERR_OUT_OF_RANGE, "Your input is out of range (1..9)"      },
-  };
+    if (!playing)
+      break;
 
-  int range = 5;
+    clear_terminal();
+    printf("\n  Did you want to continue? (yes/no)\n");
+    printf("  > ");
 
-  clear_terminal();
-
-  for (int i = 0;  i < range; i++) {
-
-    gm_msg -> update(gm_msg, pairs[i].type, pairs[i].message);
-
-    gm_msg -> print_message(gm_msg, 1);
-
-    printf("\n");
+    playing = yes_or_no_input() > 0 ? 1 : 0;
   }
+
+  printf("\n  The loop has been break\n");
+
 }
 
 void player_vs_bot_game() {
