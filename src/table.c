@@ -2,6 +2,7 @@
 #include "../include/game/table.h"
 #include "../include/game/player.h"
 #include <stdio.h>
+#include "../include/const_vars.h"
 
 int check_for_victory(Table *self) {
 
@@ -133,18 +134,33 @@ void draw_table(Table *self, int enable_colors) {
     b = self -> table_literal[i][1];
     c = self -> table_literal[i][2];
 
-    printf("                        .-.                  .-.\n");
+    printf("%s                        .-.                  .-.%s\n",
+           enable_colors ? BOLD_WHITE_NONE : ""                    ,
+           enable_colors ? RESET_ESCAPE    : ""
+    );
 
     for (int j = 0; j < symbol_y_len; j++) {
 
-      printf("          %s   | |   %s    | |   %s\n",
+      printf("          %s%s%s   | |   %s%s%s    | |   %s%s%s\n",
+
+             enable_colors && a == 1 ? BOLD_BLUE_NONE : enable_colors && a == 2 ? BOLD_MAGENTA_NONE : "",
              a == 0 ? empty_symbol[j] : a == 1 ? p1_symbol[j] : p2_symbol[j],
+             enable_colors ? BOLD_WHITE_NONE : "",
+
+             enable_colors && b == 1 ? BOLD_BLUE_NONE : enable_colors && b == 2 ? BOLD_MAGENTA_NONE : "",
              b == 0 ? empty_symbol[j] : b == 1 ? p1_symbol[j] : p2_symbol[j],
-             c == 0 ? empty_symbol[j] : c == 1 ? p1_symbol[j] : p2_symbol[j]
+             enable_colors ? BOLD_WHITE_NONE : "",
+
+             enable_colors && c == 1 ? BOLD_BLUE_NONE : enable_colors && c == 2 ? BOLD_MAGENTA_NONE : "",
+             c == 0 ? empty_symbol[j] : c == 1 ? p1_symbol[j] : p2_symbol[j],
+             enable_colors ? RESET_ESCAPE : ""
       );
     
     }
-    printf("                        '-'                  '-'\n");
+    printf("%s                        '-'                  '-'%s\n",
+           enable_colors ? BOLD_WHITE_NONE : ""                    ,
+           enable_colors ? RESET_ESCAPE    : ""
+    );
   }
 
 }
