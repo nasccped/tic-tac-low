@@ -101,53 +101,50 @@ int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
 
 void draw_table(Table *self, int enable_colors) {
 
-  const unsigned symbol_y_len = 12;
+  const unsigned symbol_y_len = 5;
 
   char *p1_symbol[] = {
-    R"(                 )",
-    R"(_____      _____ )",
-    R"(\    \    /    / )",
-    R"( \    \  /    /  )",
-    R"(  \____\/____/   )",
-    R"(  /    /\    \   )",
-    R"( /    /  \    \  )",
-    R"(/____/ /\ \____\ )",
-    R"(|    |/  \|    | )",
-    R"(|____|    |____| )",
-    R"(  \(        )/   )",
-    R"(   '        '    )"
+    "  Y8b Y8P  ",
+    "   Y8b Y   ",
+    "    Y8b    ",
+    "   e Y8b   ",
+    "  d8b Y8b  ",
   },
-       *p2_symbol[] = {
-    R"(        _____    )",
-    R"(   ____|\    \   )",
-    R"(  /     /\    \  )",
-    R"( /     /  \    \ )",
-    R"(|     |    |    |)",
-    R"(|     |    |    |)",
-    R"(|\     \  /    /|)",
-    R"(| \_____\/____/ |)",
-    R"( \ |    ||    | /)",
-    R"(  \|____||____|/ )",
-    R"(     \(    )/    )",
-    R"(      '    '     )"
+    *p2_symbol[] = {
+    "  e88#88e  ",
+    " d88P '88b ",
+    "C88B   888D",
+    " Y88b d88P ",
+    "  '88#88'  ",
   },
     *empty_symbol[] = {
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )",
-    R"(                 )"
+    "           ",
+    "           ",
+    "           ",
+    "           ",
+    "           ",
   };
 
-  for (int i = 0; i < symbol_y_len; i++) {
-    printf("   %s   %s\n", p1_symbol[i], p2_symbol[i]);
+  unsigned a, b, c;
+
+  for (int i = 0; i < 3; i++) {
+
+    a = self -> table_literal[i][0];
+    b = self -> table_literal[i][1];
+    c = self -> table_literal[i][2];
+
+    printf("                        .-.                  .-.\n");
+
+    for (int j = 0; j < symbol_y_len; j++) {
+
+      printf("          %s   | |   %s    | |   %s\n",
+             a == 0 ? empty_symbol[j] : a == 1 ? p1_symbol[j] : p2_symbol[j],
+             b == 0 ? empty_symbol[j] : b == 1 ? p1_symbol[j] : p2_symbol[j],
+             c == 0 ? empty_symbol[j] : c == 1 ? p1_symbol[j] : p2_symbol[j]
+      );
+    
+    }
+    printf("                        '-'                  '-'\n");
   }
 
 }
