@@ -212,7 +212,6 @@ int main_test(char *arg) {
     if (strcmp(arg, holder -> arg) == 0) {
 
       holder->func();
-      printf("\n");
 
       return 0;
     }
