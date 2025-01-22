@@ -21,8 +21,7 @@ typedef struct GameMessage {
                         char *              );
 } GameMessage;
 
-void player_vs_player_game(int);
-void player_vs_bot_game();
+void gameplay_function(int, int);
 
 void print_message      (struct GameMessage *, int);
 void update_game_message(struct GameMessage * ,

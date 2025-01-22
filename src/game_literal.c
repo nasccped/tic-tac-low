@@ -87,7 +87,7 @@ void update_game_message(GameMessage *self, MessageType type, char *message) {
     strcpy(self -> message, message);
 }
 
-void player_vs_player_game(int enable_colors) {
+void gameplay_function(int enable_colors, int against_bot) {
 
   Table           *tb     = &MAIN_TABLE       ;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;

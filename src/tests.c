@@ -176,7 +176,7 @@ void PVP_GAME_FUNC() {
   int colors = yes_or_no_input();
 
   // calling the function
-  player_vs_player_game(colors > 0 ? 1 : 0);
+  gameplay_function(colors > 0 ? 1 : 0, 0);
 }
 
 #include <time.h>
