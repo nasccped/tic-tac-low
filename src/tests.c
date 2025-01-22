@@ -171,6 +171,11 @@ void PVP_GAME_FUNC() {
   player_vs_player_game();
 }
 
+void RAND_FROM_ARRAY_FUNC() {
+
+  printf("  Randomize this\n");
+}
+
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
@@ -198,10 +203,11 @@ int main_test(char *arg) {
   
   ArgMapping *map = &ARG_MAPPING;
 
-  map -> append(map, &TABLE       );
-  map -> append(map, &TAKE_POS    );
-  map -> append(map, &CHANGE_TABLE);
-  map -> append(map, &PVP_GAME    );
+  map -> append(map, &TABLE          );
+  map -> append(map, &TAKE_POS       );
+  map -> append(map, &CHANGE_TABLE   );
+  map -> append(map, &PVP_GAME       );
+  map -> append(map, &RAND_FROM_ARRAY);
 
   LinkedHashMap *holder = map -> head;
 

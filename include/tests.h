@@ -21,6 +21,7 @@ void TABLE_FUNC();
 void TAKE_POS_FUNC();
 void CHANGE_TABLE_FUNC();
 void PVP_GAME_FUNC();
+void RAND_FROM_ARRAY_FUNC();
 
 static LinkedHashMap TABLE = {
   "table",
@@ -44,6 +45,12 @@ static LinkedHashMap PVP_GAME = {
   "pvp_game",
   &PVP_GAME_FUNC,
   &PVP_GAME
+};
+
+static LinkedHashMap RAND_FROM_ARRAY = {
+  "rand_from_array",
+  &RAND_FROM_ARRAY_FUNC,
+  &RAND_FROM_ARRAY
 };
 
 extern ArgMapping ARG_MAPPING;
