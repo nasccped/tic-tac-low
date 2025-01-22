@@ -79,7 +79,7 @@ void update_game_message(GameMessage *self, MessageType type, char *message) {
 
   self -> type = type;
 
-  if (strlen(message) > MESSAGE_MAX_LEN)
+  if (strlen(message) >= MESSAGE_MAX_LEN)
     strcpy(self -> message, "[UNABLE TO COPY+PASTE MESSAGE]");
   else
     strcpy(self -> message, message);
