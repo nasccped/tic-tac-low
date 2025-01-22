@@ -87,7 +87,7 @@ void update_game_message(GameMessage *self, MessageType type, char *message) {
     strcpy(self -> message, message);
 }
 
-void player_vs_player_game() {
+void player_vs_player_game(int enable_colors) {
 
   Table           *tb     = &MAIN_TABLE       ;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
@@ -127,7 +127,7 @@ void player_vs_player_game() {
 
     gm_msg -> print_message(gm_msg, 1);
 
-    tb -> draw_table(tb, 0);
+    tb -> draw_table(tb, enable_colors);
 
     if (table_status != -1) {
       printf("\n  Did you want to play again? (yes/no)\n");

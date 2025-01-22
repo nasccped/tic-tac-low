@@ -167,8 +167,16 @@ void CHANGE_TABLE_FUNC() {
 
 void PVP_GAME_FUNC() {
 
+  clear_terminal();
+
+  printf("\n");
+  printf("  Did you want to enable color escapes? (yes/no)\n");
+  printf("  > ");
+
+  int colors = yes_or_no_input();
+
   // calling the function
-  player_vs_player_game();
+  player_vs_player_game(colors > 0 ? 1 : 0);
 }
 
 #include <time.h>
