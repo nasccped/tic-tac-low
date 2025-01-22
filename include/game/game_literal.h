@@ -15,19 +15,24 @@ typedef enum MessageType {
 typedef struct GameMessage {
   MessageType type;
   char message[MESSAGE_MAX_LEN];
-  void (*updated)(struct GameMessage *,
-                  MessageType         ,
-                  char *              );
+  void (*print_message)(struct GameMessage *, int);
+  void (*update       )(struct GameMessage * ,
+                        MessageType          ,
+                        char *              );
 } GameMessage;
 
 void player_vs_player_game();
 void player_vs_bot_game();
 
-void update_game_message(struct GameMessage *, MessageType, char *);
+void print_message      (struct GameMessage *, int);
+void update_game_message(struct GameMessage * ,
+                         MessageType          ,
+                         char *              );
 
 static GameMessage MAIN_GAME_MESSAGE = {
   OK_AWAITING,
-  "awaiting",
+  "[NO MESSAGE]",
+  &print_message,
   &update_game_message
 };
 
