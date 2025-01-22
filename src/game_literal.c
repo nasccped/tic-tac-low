@@ -127,9 +127,9 @@ void player_vs_player_game() {
 
     gm_msg -> print_message(gm_msg, 1);
 
-    simple_table_print(tb);
+    tb -> draw_table(tb, 0);
 
-    if (table_status > 0) {
+    if (table_status != -1) {
       printf("\n  Did you want to play again? (yes/no)\n");
       printf("  > ");
 
