@@ -125,3 +125,23 @@ char *p_input(char *prompt, char *store_at, unsigned max_buf) {
 
   return store_at;
 }
+
+void simple_table_print(Table *self) {
+
+  if (self == NULL)
+    return;
+
+  for (int i = 0; i < 3; i++) {
+    printf("    ");
+    for (int j = 0; j < 3; j++) {
+
+      printf("%c ",
+             self -> table_literal[i][j] == 0 ? '_'
+             : self -> table_literal[i][j] == 1 ? 'X'
+             : 'O'
+      );
+
+    }
+    printf("\n");
+  }
+}
