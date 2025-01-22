@@ -149,7 +149,5 @@ void simple_table_print(Table *self) {
 
 int chose_random_int(int *int_array, unsigned array_len) {
 
-  srand(time(NULL));
-
   return int_array[rand() % array_len];
 }

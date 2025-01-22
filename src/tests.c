@@ -171,9 +171,39 @@ void PVP_GAME_FUNC() {
   player_vs_player_game();
 }
 
+#include <time.h>
+
 void RAND_FROM_ARRAY_FUNC() {
 
-  printf("  Randomize this\n");
+  int int_array[] = {
+     1,  2,  3,  4,  5,  6,  7,  8,  9,
+    10, 20, 30, 40, 50, 60, 70, 80, 90
+  };
+
+  unsigned len = 18;
+
+  printf("  Our current array is:\n    ");
+
+  for (int i = 0; i < len; i++) {
+    printf("%d%s", int_array[i], i == len - 1 ? "." : ", ");
+  }
+
+  printf("\n\n  Let's chose a random number from it!\n");
+
+  srand(time(NULL));
+
+  int the_chosen_one;
+
+  for (int i = 0; i < 10; i++) {
+
+    the_chosen_one = chose_random_int(int_array, len);
+
+    printf("    Choosing for the %s%dº time, val: %d\n",
+           i < 9 ? " " : ""                            ,
+           i + 1                                       ,
+           the_chosen_one
+    );
+  }
 }
 
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
