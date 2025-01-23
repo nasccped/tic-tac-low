@@ -13,14 +13,7 @@ typedef enum BotLookingFor {
 
 typedef struct Bot {
 
-  unsigned bot_val    ,
-           play_at_row,
-           play_at_col;
-
-  int (*array_checker)(struct Bot *,
-                       unsigned   *,
-                       unsigned    ,
-                       enum BotLookingFor);
+  unsigned bot_val;
 
   int (*get_move_pos)(struct Bot   *,
                       struct Table *);
@@ -30,17 +23,8 @@ typedef struct Bot {
 int get_move_pos(struct Bot   *,
                  struct Table *);
 
-int array_checker(struct Bot *,
-                  unsigned   *,
-                  unsigned    ,
-                  enum BotLookingFor);
-
 static struct Bot MAIN_BOT = {
-
-  2, 0, 0,
-
-  &array_checker,
-  &get_move_pos
+  2, &get_move_pos
 };
 
 #endif
