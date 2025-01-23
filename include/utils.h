@@ -16,6 +16,6 @@ char *strip(char *, unsigned);
 char *p_input(char *, char *, unsigned);
 void simple_table_print(Table *);
 int chose_random_uns(unsigned [], unsigned);
-int find_on_arr(unsigned [], unsigned, unsigned);
+unsigned find_on_arr(unsigned [], unsigned, unsigned);
 
 #endif
