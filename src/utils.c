@@ -151,3 +151,13 @@ int chose_random_int(int *int_array, unsigned array_len) {
 
   return int_array[rand() % array_len];
 }
+
+int find_on_arr(unsigned array[], unsigned searching_for, unsigned len) {
+
+  for (int i = 0; i < len; i++) {
+    if (array[i] == searching_for)
+      return 1;
+  }
+
+  return 0;
+}
