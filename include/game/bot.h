@@ -26,9 +26,9 @@ typedef struct Bot {
                        struct Table *);
   int (*bot_avoid_lose)(struct Bot   *,
                         struct Table *);
-  void *(*bot_smart_play)(struct Bot   *,
-                          struct _BAC  *,
-                          struct Table *);
+  void (*bot_smart_play)(struct Bot   *,
+                         struct _BAC  *,
+                         struct Table *);
 } Bot;
 
 int get_move_pos(struct Bot   *,
@@ -37,7 +37,7 @@ int bot_check_vic(struct Bot   *,
                   struct Table *);
 int bot_avoid_lose(struct Bot   *,
                    struct Table *);
-void *bot_smart_play(struct Bot   *,
+void bot_smart_play(struct Bot   *,
                      struct _BAC  *,
                      struct Table *);
 
