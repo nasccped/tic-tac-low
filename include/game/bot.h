@@ -17,14 +17,25 @@ typedef struct Bot {
 
   int (*get_move_pos)(struct Bot   *,
                       struct Table *);
+  int (*bot_check_vic)(struct Bot   *,
+                       struct Table *);
+  int (*bot_avoid_lose)(struct Bot   *,
+                        struct Table *);
 
 } Bot;
 
 int get_move_pos(struct Bot   *,
                  struct Table *);
+int bot_check_vic(struct Bot   *,
+                  struct Table *);
+int bot_avoid_lose(struct Bot   *,
+                   struct Table *);
 
 static struct Bot MAIN_BOT = {
-  2, &get_move_pos
+  2             ,
+  &get_move_pos ,
+  &bot_check_vic,
+  &bot_avoid_lose
 };
 
 #endif
