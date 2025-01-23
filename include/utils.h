@@ -15,7 +15,7 @@ void str_to_lower(char *);
 char *strip(char *, unsigned);
 char *p_input(char *, char *, unsigned);
 void simple_table_print(Table *);
-int chose_random_int(int [], unsigned);
+int chose_random_uns(unsigned [], unsigned);
 int find_on_arr(unsigned [], unsigned, unsigned);
 
 #endif
