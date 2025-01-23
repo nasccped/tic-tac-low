@@ -214,6 +214,25 @@ void RAND_FROM_ARRAY_FUNC() {
   }
 }
 
+void CONVERT_ROWCOLUNS_FUNC() {
+
+  unsigned array_pair[9][2] = {
+    {0, 0}, {0, 1}, {0, 2}, 
+    {1, 0}, {1, 1}, {1, 2}, 
+    {2, 0}, {2, 1}, {2, 2}, 
+  }, row, col;
+
+  printf("  Converting values:\n\n");
+  printf("  row | colum | result\n");
+
+  for (int i = 0; i < 9; i++) {
+    row = array_pair[i][0];
+    col = array_pair[i][1];
+    printf("  %d   | %d     | %d\n",
+           row, col, convert_row_col_intouns(row, col));
+  }
+}
+
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
