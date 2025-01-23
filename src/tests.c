@@ -233,6 +233,47 @@ void CONVERT_ROWCOLUNS_FUNC() {
   }
 }
 
+void SLEEP_FUNC() {
+
+  char input[10]     ,
+       alert[50] = "";
+
+  unsigned sleep_time;
+
+  while (1) {
+
+    clear_terminal();
+
+    printf("\n");
+    printf("  %s\n", alert);
+    printf("\n");
+    printf("  How many do you want to sleep? ('quit' to stop)\n");
+    p_input("  > ", input, 10);
+
+    if (strcmp(input, "quit") == 0) {
+      break;
+    }
+
+    if (!is_num(input, strlen(input))) {
+      strcpy(alert, "Your input isn't a number!");
+      continue;
+    }
+
+    sleep_time = atoi(input);
+
+    if (sleep_time > 20) {
+      strcpy(alert, "20 seconds is the maximum sleep time allowed");
+      continue;
+    }
+
+    printf("  Sleeping for %d seconds...\n", sleep_time);
+    p_sleep(sleep_time);
+  }
+
+  printf("\n");
+  printf("  Let's wake up!\n");
+}
+
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   if (self == NULL || element == NULL)
@@ -266,6 +307,7 @@ int main_test(char *arg) {
   map -> append(map, &PVP_GAME         );
   map -> append(map, &RAND_FROM_ARRAY  );
   map -> append(map, &CONVERT_ROWCOLUNS);
+  map -> append(map, &SLEEP            );
 
   LinkedHashMap *holder = map -> head;
 
