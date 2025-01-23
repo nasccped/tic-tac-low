@@ -125,7 +125,7 @@ void gameplay_function(int enable_colors, int against_bot) {
 
     printf("\n");
 
-    gm_msg -> print_message(gm_msg, 1);
+    gm_msg -> print_message(gm_msg, enable_colors);
 
     tb -> draw_table(tb, enable_colors);
 
