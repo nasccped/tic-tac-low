@@ -21,6 +21,7 @@ void TABLE_FUNC();
 void TAKE_POS_FUNC();
 void CHANGE_TABLE_FUNC();
 void PVP_GAME_FUNC();
+void PVB_GAME_FUNC();
 void RAND_FROM_ARRAY_FUNC();
 void CONVERT_ROWCOLUNS_FUNC();
 void SLEEP_FUNC();
@@ -47,6 +48,12 @@ static LinkedHashMap PVP_GAME = {
   "pvp_game",
   &PVP_GAME_FUNC,
   &PVP_GAME
+};
+
+static LinkedHashMap PVB_GAME = {
+  "pvb_game",
+  &PVB_GAME_FUNC,
+  &PVB_GAME
 };
 
 static LinkedHashMap RAND_FROM_ARRAY = {

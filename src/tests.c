@@ -179,6 +179,20 @@ void PVP_GAME_FUNC() {
   gameplay_function(colors > 0 ? 1 : 0, 0);
 }
 
+void PVB_GAME_FUNC() {
+
+  clear_terminal();
+
+  printf("\n");
+  printf("  Did you want to enable color escapes? (yes/no)\n");
+  printf("  > ");
+
+  int colors = yes_or_no_input();
+
+  // calling the function
+  gameplay_function(colors > 0 ? 1 : 0, 1);
+}
+
 #include <time.h>
 
 void RAND_FROM_ARRAY_FUNC() {
@@ -305,6 +319,7 @@ int main_test(char *arg) {
   map -> append(map, &TAKE_POS         );
   map -> append(map, &CHANGE_TABLE     );
   map -> append(map, &PVP_GAME         );
+  map -> append(map, &PVB_GAME         );
   map -> append(map, &RAND_FROM_ARRAY  );
   map -> append(map, &CONVERT_ROWCOLUNS);
   map -> append(map, &SLEEP            );
