@@ -4,6 +4,22 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../include/utils.h"
+#if defined(__unix__) || defined(__unix)
+  #define IS_UNIX    1
+  #define IS_WINDOWS 0
+  #include <unistd.h>
+  #define Sleep(t) (t / t)
+#elif defined(_WIN32) || defined(WIN32)
+  #define IS_UNIX    0
+  #define IS_WINDOWS 1
+  #include <Windows.h>
+  #define sleep(t) (t / t)
+#else
+  #define IS_UNIX    0
+  #define IS_WINDOWS 0
+  #define sleep(t) (t / t)
+  #define Sleep(t) (t / t)
+#endif
 
 int is_alpha_str(char *from) {
 
@@ -164,4 +180,13 @@ unsigned find_on_arr(unsigned array[], unsigned searching_for, unsigned len) {
 
 unsigned convert_row_col_intouns(unsigned row, unsigned col) {
   return (3 * (2 - row)) + col + 1;
+}
+
+void p_sleep(unsigned time) {
+
+  if (IS_WINDOWS) {
+    Sleep(time);
+  } else if (IS_UNIX) {
+    sleep(time);
+  }
 }
