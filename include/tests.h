@@ -22,6 +22,7 @@ void TAKE_POS_FUNC();
 void CHANGE_TABLE_FUNC();
 void PVP_GAME_FUNC();
 void RAND_FROM_ARRAY_FUNC();
+void CONVERT_ROWCOLUNS_FUNC();
 
 static LinkedHashMap TABLE = {
   "table",
@@ -51,6 +52,12 @@ static LinkedHashMap RAND_FROM_ARRAY = {
   "rand_from_array",
   &RAND_FROM_ARRAY_FUNC,
   &RAND_FROM_ARRAY
+};
+
+static LinkedHashMap CONVERT_ROWCOLUNS = {
+  "convert_rowcoluns",
+  &CONVERT_ROWCOLUNS_FUNC,
+  &CONVERT_ROWCOLUNS
 };
 
 extern ArgMapping ARG_MAPPING;
