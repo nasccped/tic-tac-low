@@ -1,5 +1,6 @@
 #include "../include/game/bot.h"
 #include "../include/utils.h"
+#include <stdlib.h>
 
 
 int get_move_pos(Bot *self, Table *tb) {
@@ -10,17 +11,20 @@ int get_move_pos(Bot *self, Table *tb) {
   // 3. Play smart
   // 4. Play randomly
   //
-  // NOTE: (1) to check for victory, I need to
+  // NOTE: to check for victory, I need to
   // - check horizontaly
   // - check verticaly
   // - check diagonaly
   //
-  // NOTE: (2) to avoid lose, I need to
+  // NOTE: to avoid lose, I need to
   // - check horizontaly
   // - check verticaly
   // - check diagonaly
 
   int holder;
+
+  MAIN_BAC.cells = NULL;
+  MAIN_BAC.len   = 0   ;
 
   if ((holder = self -> bot_check_vic(self, tb)) > 0)
     return holder;
@@ -28,7 +32,14 @@ int get_move_pos(Bot *self, Table *tb) {
   if ((holder = self -> bot_avoid_lose(self, tb)) > 0)
     return holder;
 
-  return 0;
+  self -> bot_smart_play(self, &MAIN_BAC, tb);
+
+  holder = chose_random_uns(MAIN_BAC.cells, MAIN_BAC.len);
+
+  free(MAIN_BAC.cells);
+  MAIN_BAC.len = 0;
+  
+  return holder;
 }
 
 int bot_check_vic(Bot *self, Table *tb) {
@@ -181,4 +192,52 @@ int bot_avoid_lose(Bot *self, Table *tb) {
   }
 
   return 0;
+}
+
+void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
+
+  if (bac -> cells != NULL)
+    free(bac -> cells);
+
+  bac -> len = 0;
+
+  unsigned enemy = self -> bot_val == 2 ? 1 : 2;
+
+  unsigned *available_cells = (unsigned *)malloc(sizeof(unsigned) * 9);
+
+  unsigned tl = tb -> table_literal[0][0],
+           dr = tb -> table_literal[2][2],
+           dl = tb -> table_literal[2][0],
+           tr = tb -> table_literal[0][2];
+
+  unsigned cur_cell;
+
+  if ((tl == enemy && dr == enemy) || (dl == enemy && tr == enemy)) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        cur_cell = tb -> table_literal[i][j];
+        if (cur_cell == 0 && (i == 1 || j == 1)) {
+          available_cells[bac -> len] = convert_row_col_intouns(i, j);
+          bac -> len++;
+        }
+      }
+    }
+  } else {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        cur_cell = tb -> table_literal[i][j];
+        if (cur_cell == 0 && ((i == 0 || i == 2) && (j == 0 || j == 2))) {
+          available_cells[bac -> len] = convert_row_col_intouns(i, j);
+          bac -> len++;
+        }
+      }
+    }
+  }
+
+  if (tb -> table_literal[1][1] == 0) {
+    available_cells[bac -> len] = convert_row_col_intouns(1, 1);
+    bac -> len++;
+  }
+
+  bac -> cells = available_cells;
 }
