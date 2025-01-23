@@ -211,9 +211,3 @@ void gameplay_function(int enable_colors, int against_bot) {
   printf("\n  The loop has been break\n");
 
 }
-
-void player_vs_bot_game() {
-
-  // TODO: implements the game here...
-  printf("TODO!\n");
-}
