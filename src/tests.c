@@ -183,7 +183,7 @@ void PVP_GAME_FUNC() {
 
 void RAND_FROM_ARRAY_FUNC() {
 
-  int int_array[] = {
+  unsigned int_array[] = {
      1,  2,  3,  4,  5,  6,  7,  8,  9,
     10, 20, 30, 40, 50, 60, 70, 80, 90
   };
@@ -204,7 +204,7 @@ void RAND_FROM_ARRAY_FUNC() {
 
   for (int i = 0; i < 10; i++) {
 
-    the_chosen_one = chose_random_int(int_array, len);
+    the_chosen_one = chose_random_uns(int_array, len);
 
     printf("    Choosing for the %s%dº time, val: %d\n",
            i < 9 ? " " : ""                            ,
