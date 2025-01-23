@@ -23,6 +23,7 @@ void CHANGE_TABLE_FUNC();
 void PVP_GAME_FUNC();
 void RAND_FROM_ARRAY_FUNC();
 void CONVERT_ROWCOLUNS_FUNC();
+void SLEEP_FUNC();
 
 static LinkedHashMap TABLE = {
   "table",
@@ -58,6 +59,12 @@ static LinkedHashMap CONVERT_ROWCOLUNS = {
   "convert_rowcoluns",
   &CONVERT_ROWCOLUNS_FUNC,
   &CONVERT_ROWCOLUNS
+};
+
+static LinkedHashMap SLEEP = {
+  "sleep",
+  &SLEEP_FUNC,
+  &SLEEP,
 };
 
 extern ArgMapping ARG_MAPPING;
