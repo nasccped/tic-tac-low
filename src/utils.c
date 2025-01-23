@@ -161,3 +161,7 @@ unsigned find_on_arr(unsigned array[], unsigned searching_for, unsigned len) {
 
   return 0;
 }
+
+unsigned convert_row_col_intouns(unsigned row, unsigned col) {
+  return (3 * (2 - row)) + col + 1;
+}

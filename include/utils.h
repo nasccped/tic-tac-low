@@ -17,5 +17,6 @@ char *p_input(char *, char *, unsigned);
 void simple_table_print(Table *);
 int chose_random_uns(unsigned [], unsigned);
 unsigned find_on_arr(unsigned [], unsigned, unsigned);
+unsigned convert_row_col_intouns(unsigned, unsigned);
 
 #endif
