@@ -22,33 +22,7 @@ all:
 	@echo to the [$(REPO_URL)] link
 
 build: $(SRC_FLS)
-	@if ! [ -d $(OUT) ]                                                                ; then \
-		echo                                                                             ;      \
-		$(call ptf,$(YELLOW_ESCAPE),"Output dir not found. Generating one!")             ;      \
-		mkdir $(OUT)                                                                     ;      \
-	fi                                                                                 ;
-	@echo                                                                              ;
-	@if [ -f $(OUT)/$(FINAL) ]                                                         ; then \
-		$(call ptf,$(RED_ESCAPE),"It looks like there is already a file called $(FINAL)");      \
-		echo                                                                             ;      \
-		$(call ptf,$(BLUE_ESCAPE),"Try use \'make clean build\' instead...")             ;      \
-	else                                                                                      \
-		$(call ptf,$(BLUE_ESCAPE),"Compiling the following files:")                      ;      \
-		for fl in $^                                                                     ; do   \
-			echo "        |> $$fl"                                                         ;      \
-		done                                                                             ;      \
-		echo                                                                             ;      \
-		$(call ptf,$(YELLOW_ESCAPE),"This can take a while...")                          ;      \
-		echo                                                                             ;      \
-		$(CC) $^ -o $(OUT)/$(FINAL)                                                      ;      \
-		if ! [ -f $(OUT)/$(FINAL) ]                                                      ; then \
-			$(call ptf,$(RED_ESCAPE),"Something went wrong...")                            ;      \
-		else                                                                                    \
-			$(call ptf,$(GREEN_ESCAPE),"Success!")                                         ;      \
-			$(call ptf,$(GREEN_ESCAPE),"Try using \'make run\' now!")                      ;      \
-		fi                                                                               ;      \
-	fi                                                                                 ;
-	@echo                                                                              ;
+	gcc $^ -o $(OUT)/$(FINAL)
 
 run: $(OUT)/$(FINAL)
 	$(OUT)/$(FINAL)
