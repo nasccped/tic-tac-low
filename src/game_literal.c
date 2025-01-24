@@ -95,6 +95,8 @@ void gameplay_function(int enable_colors, int against_bot) {
   GameMessage     *gm_msg = &MAIN_GAME_MESSAGE;
   Bot             *bot    = &MAIN_BOT         ;
 
+  tb -> reset_table(tb);
+
   char     store_input[INPUT_MAX_LEN];
   unsigned input_as_uns              ;
 

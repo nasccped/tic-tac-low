@@ -239,10 +239,10 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
       }
     }
   } else {
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; i += 2) {
+      for (int j = 0; j < 3; j += 2) {
         cur_cell = tb -> table_literal[i][j];
-        if (cur_cell == 0 && ((i == 0 || i == 2) && (j == 0 || j == 2))) {
+        if (cur_cell == 0) {
           available_cells[bac -> len] = convert_row_col_intouns(i, j);
           bac -> len++;
         }
