@@ -1,14 +1,14 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "../include/visuals.h"
+#include "../include/const_vars.h"
+#include "../include/game/player.h"
+#include "../include/game/game_literal.h"
 #include "../include/game/table.h"
 #include "../include/tests.h"
-#include "../include/game/player.h"
 #include "../include/utils.h"
-#include "../include/const_vars.h"
-#include "../include/game/game_literal.h"
+#include "../include/visuals.h"
 
 ArgMapping ARG_MAPPING = {
   0, NULL, &append_lhm
@@ -17,7 +17,8 @@ ArgMapping ARG_MAPPING = {
 void TABLE_FUNC() {
 
   printf("\n");
-  printf("  Let's run some table checking tests\n\n");
+  printf("  Let's run some table checking tests\n");
+  printf("\n");
   printf("\n");
 
   unsigned r, c;
@@ -35,6 +36,7 @@ void TABLE_FUNC() {
 
       if (i == 1)
         printf("  > val: %d  ", v);
+
       else
         printf("            ");
 
@@ -42,11 +44,10 @@ void TABLE_FUNC() {
 
         if (r == i && c == j)
           printf("X ");
+
         else
           printf("_ ");
-
       }
-
       printf("\n");
     }
     printf("\n");
@@ -66,8 +67,10 @@ void TAKE_POS_FUNC() {
     printf("\x1b[2J\x1b[H");
 
     printf("\n");
-    printf("  row: %c | col: %c\n\n", row == -1 ? '?' : '0' + row,
-                                      col == -1 ? '?' : '0' + col);
+    printf("  row: %c | col: %c\n",
+           row == -1 ? '?' : '0' + row,
+           col == -1 ? '?' : '0' + col);
+    printf("\n");
 
     printf("  Chose a pos by num keyboard (0 to quit): ");
     fgets(val_holder, 29, stdin);
@@ -84,8 +87,8 @@ void TAKE_POS_FUNC() {
       break;
 
     if (CATCH_PLAYER_MOVE.get_move(&CATCH_PLAYER_MOVE,
-                                   1                 ,
-                                   val               ) == NULL) {
+                                   1,
+                                   val) == NULL) {
       row = -1;
       col = -1;
       continue;
@@ -99,13 +102,13 @@ void TAKE_POS_FUNC() {
 
 void CHANGE_TABLE_FUNC() {
 
-  Table           *table  = &MAIN_TABLE       ;
+  Table *table = &MAIN_TABLE;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
 
-  int target_pos                                         ,
+  int target_pos,
       table_situation = table -> check_for_victory(table);
 
-  char input[INPUT_MAX_LEN]        ,
+  char input[INPUT_MAX_LEN],
        alert[40] = "Awaiting input";
 
   while (1) {
@@ -133,8 +136,9 @@ void CHANGE_TABLE_FUNC() {
     }
 
     if (p_input("  Give some number ('quit!' to stop): ",
-                input                               ,
-                INPUT_MAX_LEN                       ) == NULL) {
+                input,
+                INPUT_MAX_LEN) == NULL) {
+
       printf("  Your input has been returned NULL\n");
       break;
     }
@@ -197,8 +201,9 @@ void PVB_GAME_FUNC() {
 void RAND_FROM_ARRAY_FUNC() {
 
   unsigned int_array[] = {
-     1,  2,  3,  4,  5,  6,  7,  8,  9,
-    10, 20, 30, 40, 50, 60, 70, 80, 90
+     1,  2,  3,  4,  5,  6,
+     7,  8,  9, 10, 20, 30,
+    40, 50, 60, 70, 80, 90
   };
 
   unsigned len = 18;
@@ -206,7 +211,9 @@ void RAND_FROM_ARRAY_FUNC() {
   printf("  Our current array is:\n    ");
 
   for (int i = 0; i < len; i++) {
-    printf("%d%s", int_array[i], i == len - 1 ? "." : ", ");
+    printf("%d%s",
+           int_array[i], i == len - 1 ?
+           "." : ", ");
   }
 
   printf("\n\n  Let's chose a random number from it!\n");
@@ -218,10 +225,9 @@ void RAND_FROM_ARRAY_FUNC() {
     the_chosen_one = chose_random_uns(int_array, len);
 
     printf("    Choosing for the %s%dº time, val: %d\n",
-           i < 9 ? " " : ""                            ,
-           i + 1                                       ,
-           the_chosen_one
-    );
+           i < 9 ? " " : "",
+           i + 1,
+           the_chosen_one);
   }
 }
 
@@ -287,9 +293,6 @@ void SLEEP_FUNC() {
 
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
-  if (self == NULL || element == NULL)
-    return;
-
   element -> next = NULL;
 
   if (self -> count == 0) {
@@ -312,14 +315,14 @@ int main_test(char *arg) {
   
   ArgMapping *map = &ARG_MAPPING;
 
-  map -> append(map, &TABLE            );
-  map -> append(map, &TAKE_POS         );
-  map -> append(map, &CHANGE_TABLE     );
-  map -> append(map, &PVP_GAME         );
-  map -> append(map, &PVB_GAME         );
-  map -> append(map, &RAND_FROM_ARRAY  );
+  map -> append(map, &TABLE);
+  map -> append(map, &TAKE_POS);
+  map -> append(map, &CHANGE_TABLE);
+  map -> append(map, &PVP_GAME);
+  map -> append(map, &PVB_GAME);
+  map -> append(map, &RAND_FROM_ARRAY);
   map -> append(map, &CONVERT_ROWCOLUNS);
-  map -> append(map, &SLEEP            );
+  map -> append(map, &SLEEP);
 
   LinkedHashMap *holder = map -> head;
 
@@ -328,9 +331,7 @@ int main_test(char *arg) {
   while (holder != NULL) {
 
     if (strcmp(arg, holder -> arg) == 0) {
-
       holder->func();
-
       return 0;
     }
 

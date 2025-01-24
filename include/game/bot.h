@@ -8,16 +8,15 @@
 typedef enum BotLookingFor {
   VICTORY,
   DEFENSE,
-  RANDOM,
+  RANDOM ,
 } BotLookingFor;
 
 typedef struct _BAC {
   unsigned *cells,
-            len  ;
+            len;
 } BotAvailableCells;
 
 typedef struct Bot {
-
   unsigned bot_val;
 
   int (*get_move_pos)(struct Bot   *,

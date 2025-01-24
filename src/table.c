@@ -1,13 +1,9 @@
-#include <stdlib.h>
-#include "../include/game/table.h"
-#include "../include/game/player.h"
 #include <stdio.h>
 #include "../include/const_vars.h"
+#include "../include/game/player.h"
+#include "../include/game/table.h"
 
 int check_for_victory(Table *self) {
-
-  if (self == NULL)
-    return -1;
 
   unsigned a, b, c;
 
@@ -27,12 +23,6 @@ int check_for_victory(Table *self) {
     if (a == b && b == c && c != 0)
       return c;
 
-    for (int j = 0; j < 3; j++) {
-      if (*abc_collec[j] == 0)
-        still_runing++;
-    }
-
-
     // checking for verticals
     a = self -> table_literal[0][i];
     b = self -> table_literal[1][i];
@@ -40,12 +30,6 @@ int check_for_victory(Table *self) {
 
     if (a == b && b == c && c != 0)
       return c;
-
-    for (int j = 0; j < 3; j++) {
-      if (*abc_collec[j] == 0)
-        still_runing++;
-    }
-
 
     // checking for diagonals
     a = self -> table_literal[0][  i  ];
@@ -74,12 +58,6 @@ void reset_table(Table *self) {
 
 int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
 
-  if (self == NULL)
-    return 0;
-
-  if (catch_pmove == NULL)
-    return 0;
-
   unsigned row = catch_pmove -> at_row    ,
            col = catch_pmove -> at_col    ,
            val = catch_pmove -> player_val;
@@ -97,6 +75,7 @@ int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
     return 0;
 
   self -> table_literal[row][col] = val;
+
   return 1;
 }
 
@@ -135,32 +114,50 @@ void draw_table(Table *self, int enable_colors) {
     c = self -> table_literal[i][2];
 
     printf("%s                        .-.                  .-.%s\n",
-           enable_colors ? BOLD_WHITE_NONE : ""                    ,
-           enable_colors ? RESET_ESCAPE    : ""
-    );
+           enable_colors ? BOLD_WHITE_NONE : "",
+           enable_colors ? RESET_ESCAPE    : "");
 
     for (int j = 0; j < symbol_y_len; j++) {
 
       printf("          %s%s%s   | |   %s%s%s    | |   %s%s%s\n",
 
-             enable_colors && a == 1 ? BOLD_BLUE_NONE : enable_colors && a == 2 ? BOLD_MAGENTA_NONE : "",
-             a == 0 ? empty_symbol[j] : a == 1 ? p1_symbol[j] : p2_symbol[j],
+             enable_colors && a == 1 ?
+               BOLD_BLUE_NONE : enable_colors && a == 2 ?
+                 BOLD_MAGENTA_NONE : "",
+
+             a == 0 ?
+               empty_symbol[j] : a == 1 ?
+                 p1_symbol[j] : p2_symbol[j],
+
              enable_colors ? BOLD_WHITE_NONE : "",
 
-             enable_colors && b == 1 ? BOLD_BLUE_NONE : enable_colors && b == 2 ? BOLD_MAGENTA_NONE : "",
-             b == 0 ? empty_symbol[j] : b == 1 ? p1_symbol[j] : p2_symbol[j],
+
+             enable_colors && b == 1 ?
+               BOLD_BLUE_NONE : enable_colors && b == 2 ?
+                 BOLD_MAGENTA_NONE : "",
+
+             b == 0 ?
+               empty_symbol[j] : b == 1 ?
+                 p1_symbol[j] : p2_symbol[j],
+
              enable_colors ? BOLD_WHITE_NONE : "",
 
-             enable_colors && c == 1 ? BOLD_BLUE_NONE : enable_colors && c == 2 ? BOLD_MAGENTA_NONE : "",
-             c == 0 ? empty_symbol[j] : c == 1 ? p1_symbol[j] : p2_symbol[j],
-             enable_colors ? RESET_ESCAPE : ""
-      );
+
+             enable_colors && c == 1 ?
+               BOLD_BLUE_NONE : enable_colors && c == 2 ?
+                 BOLD_MAGENTA_NONE : "",
+
+             c == 0 ?
+               empty_symbol[j] : c == 1 ?
+                 p1_symbol[j] : p2_symbol[j],
+
+             enable_colors ? RESET_ESCAPE : "");
     
     }
+
     printf("%s                        '-'                  '-'%s\n",
-           enable_colors ? BOLD_WHITE_NONE : ""                    ,
-           enable_colors ? RESET_ESCAPE    : ""
-    );
+           enable_colors ? BOLD_WHITE_NONE : "",
+           enable_colors ? RESET_ESCAPE    : "");
   }
 
 }

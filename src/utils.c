@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "../include/utils.h"
 #if defined(__unix__) || defined(__unix)
@@ -24,7 +24,7 @@
 int is_alpha_str(char *from) {
 
   unsigned len = strlen(from);
-  int hold;
+  char hold;
 
   for (int i = 0; i < len; i++) {
     hold = from[i];
@@ -98,10 +98,12 @@ int yes_or_no_input() {
   if (len == 0)
     return -1;
 
-  if (len == 1 && (strcmp(answer, "y") == 0 || strcmp(answer, "Y") == 0))
+  if (len == 1
+      && (strcmp(answer, "y") == 0 || strcmp(answer, "Y") == 0))
     return 1;
 
-  if (len == 1 && (strcmp(answer, "n") == 0 || strcmp(answer, "N") == 0))
+  if (len == 1
+      && (strcmp(answer, "n") == 0 || strcmp(answer, "N") == 0))
     return 0;
 
   if (!is_alpha_str(answer))
@@ -119,19 +121,15 @@ int yes_or_no_input() {
 
   if (strcmp(answer, "yes") == 0)
     return 1;
+
   else if (strcmp(answer, "no") == 0)
     return 0;
+
   else
     return -1;
 }
 
 char *p_input(char *prompt, char *store_at, unsigned max_buf) {
-
-  if (store_at == NULL)
-    return NULL;
-
-  if (max_buf < 1)
-    return NULL;
 
   printf("%s", prompt == NULL ? "" : prompt);
 
@@ -145,18 +143,14 @@ char *p_input(char *prompt, char *store_at, unsigned max_buf) {
 
 void simple_table_print(Table *self) {
 
-  if (self == NULL)
-    return;
-
   for (int i = 0; i < 3; i++) {
     printf("    ");
     for (int j = 0; j < 3; j++) {
 
       printf("%c ",
-             self -> table_literal[i][j] == 0 ? '_'
-             : self -> table_literal[i][j] == 1 ? 'X'
-             : 'O'
-      );
+             self -> table_literal[i][j] == 0 ?
+               '_' : self -> table_literal[i][j] == 1 ?
+                 'X' : 'O');
 
     }
     printf("\n");

@@ -8,11 +8,15 @@ void clear_terminal() {
 
 void print_banner(unsigned enable_colors) {
 
-  unsigned row_len = sizeof(BANNER_ART[0]) / sizeof(BANNER_ART[0][0]);
+  unsigned row_len = (
+    sizeof(BANNER_ART[0]) / sizeof(BANNER_ART[0][0])
+  );
+
   char cur;
 
   printf("\n");
   printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
+
   for (int i = 0; i < row_len - 10; i++)
     printf("-");
 
@@ -46,11 +50,14 @@ void print_banner(unsigned enable_colors) {
     }
     printf("\n");
   }
+
   printf("%s", enable_colors ? RESET_ESCAPE : "");
 
   printf("\n");
   printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
+
   for (int i = 0; i < row_len - 10; i++)
     printf("-");
+
   printf("%s\n", enable_colors ? RESET_ESCAPE : "");
 }

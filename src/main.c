@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../include/about.h"
-#include "../include/visuals.h"
-#include "../include/utils.h"
-#include "../include/options.h"
-#include "../include/tests.h"
-#include "../include/game/rooms.h"
 #include "../include/const_vars.h"
 #include "../include/game/game_literal.h"
+#include "../include/game/rooms.h"
+#include "../include/options.h"
+#include "../include/tests.h"
+#include "../include/utils.h"
+#include "../include/visuals.h"
 
 unsigned ENABLE_COLORS;
 
@@ -23,7 +23,8 @@ int main(int argc, char *argv[]) {
 
     // printting unexpected arg count
     printf("\n");
-    printf("  Unexpected args being received (count: %d)\n", argc - 1);
+    printf("  Unexpected args being received (count: %d)\n",
+           argc - 1);
 
     // printting each arg
     for (int i = 1; i < argc; i++) {
@@ -53,7 +54,9 @@ int main(int argc, char *argv[]) {
 
   // asking for colors
   printf("\n");
-  printf("  Did you want to enable colors in the program? (yes / no | anything to quit)\n");
+  printf("  Did you want to enable colors in the program? "
+         "(yes / no | anything to quit)\n");
+
   printf("  > ");
 
   // if quit was called
@@ -64,6 +67,7 @@ int main(int argc, char *argv[]) {
     // quit print
     printf("\n");
     printf("  Quitting...\n");
+    printf("\n");
 
     // terminate
     return 0;
@@ -72,10 +76,10 @@ int main(int argc, char *argv[]) {
   // update var (only > -1 values)
   ENABLE_COLORS  = color_trigger;
 
-  int game_running = 1        ;
-  char menu_resp[INPUT_MAX_LEN];
-  MAIN_GAME_ROOM   = MAIN_MENU;
+  int game_running = 1;
+  MAIN_GAME_ROOM = MAIN_MENU;
 
+  char menu_resp[INPUT_MAX_LEN];
 
   while (game_running) {
 
@@ -86,11 +90,14 @@ int main(int argc, char *argv[]) {
       case MAIN_MENU:
         print_banner(ENABLE_COLORS);
         printf("\n");
+
         print_options(ENABLE_COLORS, MENU_OPTIONS);
         printf("\n");
+
         p_input("  > ", menu_resp, INPUT_MAX_LEN);
 
         if (is_num(menu_resp, strlen(menu_resp))) {
+
           switch (atoi(menu_resp)) {
             case 1:
               MAIN_GAME_ROOM = PLAYING;
@@ -111,7 +118,10 @@ int main(int argc, char *argv[]) {
       case PLAYING:
         print_banner(ENABLE_COLORS);
         printf("\n");
-        printf("  Do you want to play against: (player / bot / anything to cancel)\n");
+
+        printf("  Do you want to play against: "
+               "(player / bot / anything to cancel)\n");
+
         p_input("  > ", menu_resp, INPUT_MAX_LEN);
 
         if (strcmp(menu_resp, "player") == 0)
@@ -126,7 +136,9 @@ int main(int argc, char *argv[]) {
         print_banner(ENABLE_COLORS);
         printf("\n");
         printting_about(ENABLE_COLORS);
-        p_input("  > Press Enter to continue", menu_resp, INPUT_MAX_LEN);
+        p_input("  > Press Enter to continue",
+                menu_resp    ,
+                INPUT_MAX_LEN);
 
         MAIN_GAME_ROOM = MAIN_MENU;
         break;
@@ -140,6 +152,7 @@ int main(int argc, char *argv[]) {
 
   printf("\n");
   printf(" Quitting...\n");
+  printf("\n");
 
   return 0;
 }

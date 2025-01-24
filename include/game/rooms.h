@@ -5,7 +5,7 @@ typedef enum GameRoomEnum {
   MAIN_MENU,
   PLAYING  ,
   ABOUT    ,
-  QUIT     ,
+  QUIT
 } GameRoom;
 
 static GameRoom MAIN_GAME_ROOM;

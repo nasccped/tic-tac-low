@@ -9,9 +9,6 @@ struct CatchPlayerMove *set_player_move(CatchPlayerMove *dest, unsigned int play
   if (player < 1 || player > 2)
     return NULL;
 
-  if (dest == NULL)
-    return NULL;
-
   unsigned row = 2,
            col = 0;
 

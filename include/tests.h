@@ -12,10 +12,12 @@ typedef struct LinkedHashMap {
 typedef struct ArgMapping {
   unsigned count;
   struct LinkedHashMap *head;
-  void (*append)(struct ArgMapping *, struct LinkedHashMap *);
+  void (*append)(struct ArgMapping    *,
+                 struct LinkedHashMap *);
 } ArgMapping;
 
-void append_lhm(struct ArgMapping *, struct LinkedHashMap *);
+void append_lhm(struct ArgMapping    *,
+                struct LinkedHashMap *);
 
 void TABLE_FUNC();
 void TAKE_POS_FUNC();
@@ -27,51 +29,51 @@ void CONVERT_ROWCOLUNS_FUNC();
 void SLEEP_FUNC();
 
 static LinkedHashMap TABLE = {
-  "table",
+  "table"    ,
   &TABLE_FUNC,
-  &TABLE,
+  &TABLE
 };
 
 static LinkedHashMap TAKE_POS = {
-  "take_pos",
+  "take_pos"    ,
   &TAKE_POS_FUNC,
   &TAKE_POS
 };
 
 static LinkedHashMap CHANGE_TABLE = {
-  "change_table",
+  "change_table"    ,
   &CHANGE_TABLE_FUNC,
   &CHANGE_TABLE
 };
 
 static LinkedHashMap PVP_GAME = {
-  "pvp_game",
+  "pvp_game"    ,
   &PVP_GAME_FUNC,
   &PVP_GAME
 };
 
 static LinkedHashMap PVB_GAME = {
-  "pvb_game",
+  "pvb_game"    ,
   &PVB_GAME_FUNC,
   &PVB_GAME
 };
 
 static LinkedHashMap RAND_FROM_ARRAY = {
-  "rand_from_array",
+  "rand_from_array"    ,
   &RAND_FROM_ARRAY_FUNC,
   &RAND_FROM_ARRAY
 };
 
 static LinkedHashMap CONVERT_ROWCOLUNS = {
-  "convert_rowcoluns",
+  "convert_rowcoluns"    ,
   &CONVERT_ROWCOLUNS_FUNC,
   &CONVERT_ROWCOLUNS
 };
 
 static LinkedHashMap SLEEP = {
-  "sleep",
+  "sleep"    ,
   &SLEEP_FUNC,
-  &SLEEP,
+  &SLEEP
 };
 
 extern ArgMapping ARG_MAPPING;

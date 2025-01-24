@@ -1,84 +1,73 @@
-#include "../include/game/game_literal.h"
-#include "../include/game/table.h"
-#include "../include/const_vars.h"
-#include "../include/visuals.h"
-#include "../include/utils.h"
-#include "../include/game/bot.h"
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "../include/const_vars.h"
+#include "../include/game/bot.h"
+#include "../include/game/game_literal.h"
+#include "../include/game/table.h"
+#include "../include/utils.h"
+#include "../include/visuals.h"
 
 void print_message(GameMessage *self, int enable_colors) {
 
-  if (self == NULL)
-    return;
+  MessageType *type = &(self -> type);
+  char *message = self -> message;
 
-  MessageType *type    = &(self -> type);
-  char        *message = self -> message;
+  printf("  %s-------------------------------------------------------"
+         "---------------%s\n",
 
-  printf("  %s----------------------------------------------------------------------%s\n",
          enable_colors ? BOLD_WHITE_NONE : "",
-         enable_colors ? RESET_ESCAPE    : ""
-  );
+         enable_colors ? RESET_ESCAPE    : "");
 
   switch (self -> type) {
 
     case OK_AWAITING:
-      printf("   %s AWAITING: %s "                    ,
+      printf("   %s AWAITING: %s "                 ,
              enable_colors ? BOLD_WHITE_YELLOW : "",
-             enable_colors ? RESET_ESCAPE      : ""
-      );
+             enable_colors ? RESET_ESCAPE      : "");
       break;
 
     case OK_WINS:
-      printf("   %s WIN: %s "                        ,
+      printf("   %s WIN: %s "                     ,
              enable_colors ? BOLD_WHITE_GREEN : "",
-             enable_colors ? RESET_ESCAPE     : ""
-      );
+             enable_colors ? RESET_ESCAPE     : "");
       break;
 
     case OK_BREAK_EVEN:
-      printf("   %s BREAK EVEN: %s "                 ,
+      printf("   %s BREAK EVEN: %s "              ,
              enable_colors ? BOLD_WHITE_GREEN : "",
-             enable_colors ? RESET_ESCAPE     : ""
-      );
+             enable_colors ? RESET_ESCAPE     : "");
       break;
 
     case ERR_NON_NUMERIC:
-      printf("   %s ERROR-NUMERIC: %s "            ,
+      printf("   %s ERROR-NUMERIC: %s "         ,
              enable_colors ? BOLD_WHITE_RED : "",
-             enable_colors ? RESET_ESCAPE   : ""
-      );
+             enable_colors ? RESET_ESCAPE   : "");
       break;
 
     case ERR_OUT_OF_RANGE:
-      printf("   %s ERROR-RANGE: %s "              ,
+      printf("   %s ERROR-RANGE: %s "           ,
              enable_colors ? BOLD_WHITE_RED : "",
-             enable_colors ? RESET_ESCAPE   : ""
-      );
+             enable_colors ? RESET_ESCAPE   : "");
       break;
 
     case ERR_CELL_ALREADY_TAKEN:
-      printf("   %s ERROR-CELL: %s "               ,
+      printf("   %s ERROR-CELL: %s "            ,
              enable_colors ? BOLD_WHITE_RED : "",
-             enable_colors ? RESET_ESCAPE   : ""
-      );
+             enable_colors ? RESET_ESCAPE   : "");
       break;
   }
 
   printf("%s\n", message);
 
-  printf("  %s----------------------------------------------------------------------%s\n",
+  printf("  %s-------------------------------------------------------"
+         "---------------%s\n",
+
          enable_colors ? BOLD_WHITE_NONE : "",
-         enable_colors ? RESET_ESCAPE    : ""
-  );
+         enable_colors ? RESET_ESCAPE    : "");
 }
 
 void update_game_message(GameMessage *self, MessageType type, char *message) {
-
-  if (self == NULL)
-    return;
 
   self -> type = type;
 
@@ -90,23 +79,23 @@ void update_game_message(GameMessage *self, MessageType type, char *message) {
 
 void gameplay_function(int enable_colors, int against_bot) {
 
-  Table           *tb     = &MAIN_TABLE       ;
+  Table *tb = &MAIN_TABLE;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
-  GameMessage     *gm_msg = &MAIN_GAME_MESSAGE;
-  Bot             *bot    = &MAIN_BOT         ;
+  GameMessage *gm_msg = &MAIN_GAME_MESSAGE;
+  Bot *bot = &MAIN_BOT;
 
   tb -> reset_table(tb);
 
-  char     store_input[INPUT_MAX_LEN];
-  unsigned input_as_uns              ;
+  char store_input[INPUT_MAX_LEN];
+  unsigned input_as_uns;
 
-  int playing      = 1,
-      player_turn  = 1,
-      bot_turn     = 0,
+  int playing = 1,
+      player_turn = 1,
+      bot_turn = 0,
       table_status = tb -> check_for_victory(tb);
 
   unsigned sleeps[] = {1, 2, 3, 4},
-           slp_len  = 4           ;
+           slp_len = 4;
 
   gm_msg -> update(gm_msg, OK_AWAITING, "Waiting for player 1 move");
 
@@ -130,14 +119,13 @@ void gameplay_function(int enable_colors, int against_bot) {
     }
 
     clear_terminal();
-
     printf("\n");
 
     gm_msg -> print_message(gm_msg, enable_colors);
-
     tb -> draw_table(tb, enable_colors);
 
     if (table_status != -1) {
+
       printf("\n  Did you want to play again? (yes/no)\n");
       printf("  > ");
 
@@ -147,8 +135,7 @@ void gameplay_function(int enable_colors, int against_bot) {
 
         gm_msg -> update(gm_msg     ,
                          OK_AWAITING,
-                         "Waiting for player 1 move"
-        );
+                         "Waiting for player 1 move");
 
         player_turn  =  1;
         table_status = -1;
@@ -158,29 +145,34 @@ void gameplay_function(int enable_colors, int against_bot) {
 
         playing = 0;
       }
+
       continue;
     }
 
     if (bot_turn) {
 
       printf("\n  ... \n");
-      p_sleep(chose_random_uns(sleeps, slp_len));
 
       input_as_uns = bot -> get_move_pos(bot, tb);
+      p_sleep(chose_random_uns(sleeps, slp_len));
 
     } else {
 
-      printf("\n  Choose a table cell based on numeric k.board (1..9)\n");
+      printf("\n  Choose a table cell based on numeric k.board "
+             "(1..9)\n");
+
       p_input("  > ", store_input, INPUT_MAX_LEN);
 
       if (!is_num(store_input, strlen(store_input))) {
 
         gm_msg -> update(gm_msg         ,
-                       ERR_NON_NUMERIC,
-                       player_turn == 1
-                       ? "Given input is invalid (Non numeric). Player 1 turn"
-                       : "Given input is invalid (Non numeric). Player 2 turn"
-        );
+                         ERR_NON_NUMERIC,
+                         player_turn == 1
+                         ? "Given input is invalid (Non numeric). "
+                           "Player 1 turn"
+
+                         : "Given input is invalid (Non numeric). "
+                           "Player 2 turn");
 
         continue;
       }
@@ -192,9 +184,11 @@ void gameplay_function(int enable_colors, int against_bot) {
         gm_msg -> update(gm_msg          ,
                          ERR_OUT_OF_RANGE,
                          player_turn == 1
-                         ? "Given input is out of range (1..9). Player 1 turn"
-                         : "Given input is out of range (1..9). Player 2 turn"
-        );
+                         ? "Given input is out of range (1..9). "
+                           "Player 1 turn"
+
+                         : "Given input is out of range (1..9). "
+                           "Player 2 turn");
 
         continue;
       }
@@ -208,9 +202,11 @@ void gameplay_function(int enable_colors, int against_bot) {
       gm_msg -> update(gm_msg                ,
                        ERR_CELL_ALREADY_TAKEN,
                        player_turn == 1
-                       ? "This cell has already been chosen. Player 1 turn"
-                       : "This cell has already been chosen. Player 2 turn"
-      );
+                       ? "This cell has already been chosen. "
+                         "Player 1 turn"
+
+                       : "This cell has already been chosen. "
+                         "Player 2 turn");
 
       continue;
     }
@@ -225,6 +221,7 @@ void gameplay_function(int enable_colors, int against_bot) {
       gm_msg -> update(gm_msg     ,
                        OK_AWAITING,
                        "Waiting for Bot Play");
+
       continue;
     }
 
@@ -234,8 +231,7 @@ void gameplay_function(int enable_colors, int against_bot) {
                      OK_AWAITING,
                      player_turn == 1
                      ? "Waiting for player 1 move"
-                     : "Waiting for player 2 move"
-    );
+                     : "Waiting for player 2 move");
 
   }
 }

@@ -6,12 +6,13 @@
 #endif
 
 typedef struct Table {
-  unsigned table_literal[3][3]             ;
+  unsigned table_literal[3][3];
+
   int  (*check_for_victory)(struct Table *);
-  void (*reset_table      )(struct Table *);
-  int  (*change_on_table  )(struct Table * ,
-                            struct CatchPlayerMove *);
-  void (*draw_table       )(struct Table *, int     );
+  void (*reset_table)(struct Table *);
+  int  (*change_on_table)(struct Table *          ,
+                          struct CatchPlayerMove *);
+  void (*draw_table)(struct Table *, int);
 } Table;
 
 int  check_for_victory(struct Table *);
