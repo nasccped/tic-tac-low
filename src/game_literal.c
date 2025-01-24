@@ -201,7 +201,7 @@ void gameplay_function(int enable_colors, int against_bot) {
 
     p_move -> get_move(p_move, player_turn, input_as_uns);
     
-    if (!tb -> change_on_table(tb, p_move) && !against_bot) {
+    if (!tb -> change_on_table(tb, p_move) && against_bot) {
 
       gm_msg -> update(gm_msg                ,
                        ERR_CELL_ALREADY_TAKEN,
