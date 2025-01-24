@@ -50,28 +50,8 @@ build: $(SRC_FLS)
 	fi                                                                                 ;
 	@echo                                                                              ;
 
-run:
-	@echo                                                         ;
-	@if ! [ -d $(OUT) ]                                           ; then \
-		$(call ptf,$(RED_ESCAPE),"Output dir not found")            ;      \
-		$(call ptf,$(YELLOW_ESCAPE),"Use \'make build\' instead")   ;      \
-	else                                                                 \
-		if ! [ -f $(OUT)/$(FINAL) ]                                 ; then \
-			$(call ptf,$(RED_ESCAPE),"Program executable not found!") ;      \
-			$(call ptf,$(YELLOW_ESCAPE),"Use \'make build\' instead") ;      \
-		else                                                               \
-			$(call ptf,$(GREEN_ESCAPE),"The program is ready to run!");      \
-			printf "   "                                              ;      \
-			for i in 3 2 1                                            ; do   \
-				printf " $$i"                                           ;      \
-				sleep .5                                                ;      \
-			done                                                      ;      \
-			echo                                                      ;      \
-			echo                                                      ;      \
-			$(OUT)/$(FINAL)                                           ;      \
-		fi                                                          ;      \
-	fi                                                            ;
-	@echo                                                         ;
+run: $(OUT)/$(FINAL)
+	$(OUT)/$(FINAL)
 
 clean: $(OUT)/$(FINAL)
 	@rm $^
