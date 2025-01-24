@@ -12,7 +12,8 @@ static const char *RESET_ESCAPE      = "\x1b[0m"      ,
                   *BOLD_WHITE_NONE   = "\x1b[1;37m"   ,
                   *BOLD_WHITE_RED    = "\x1b[1;37;41m",
                   *BOLD_WHITE_GREEN  = "\x1b[1;37;42m",
-                  *BOLD_WHITE_YELLOW = "\x1b[1;37;43m";
+                  *BOLD_WHITE_YELLOW = "\x1b[1;37;43m",
+                  *REPOSITORY_URL    = "https://github.com/nasccped/tic-tac-low";
 
 extern unsigned ENABLE_COLORS;
 
