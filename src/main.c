@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 #include "../include/visuals.h"
 #include "../include/utils.h"
 #include "../include/options.h"
