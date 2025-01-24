@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
+#include "../include/about.h"
 #include "../include/visuals.h"
 #include "../include/utils.h"
 #include "../include/options.h"
 #include "../include/tests.h"
+#include "../include/game/rooms.h"
+#include "../include/const_vars.h"
+#include "../include/game/game_literal.h"
 
 unsigned ENABLE_COLORS;
 
@@ -65,11 +70,76 @@ int main(int argc, char *argv[]) {
   }
 
   // update var (only > -1 values)
-  ENABLE_COLORS = color_trigger;
+  ENABLE_COLORS  = color_trigger;
 
-  clear_terminal();
-  print_banner(ENABLE_COLORS);
-  print_options(ENABLE_COLORS, MENU_OPTIONS);
+  int game_running = 1        ;
+  char menu_resp[INPUT_MAX_LEN];
+  MAIN_GAME_ROOM   = MAIN_MENU;
+
+
+  while (game_running) {
+
+    clear_terminal();
+
+    switch (MAIN_GAME_ROOM) {
+
+      case MAIN_MENU:
+        print_banner(ENABLE_COLORS);
+        printf("\n");
+        print_options(ENABLE_COLORS, MENU_OPTIONS);
+        printf("\n");
+        p_input("  > ", menu_resp, INPUT_MAX_LEN);
+
+        if (is_num(menu_resp, strlen(menu_resp))) {
+          switch (atoi(menu_resp)) {
+            case 1:
+              MAIN_GAME_ROOM = PLAYING;
+              break;
+
+            case 2:
+              MAIN_GAME_ROOM = ABOUT;
+              break;
+
+            case 3:
+              MAIN_GAME_ROOM = QUIT;
+              break;
+          }
+        };
+
+        break;
+
+      case PLAYING:
+        print_banner(ENABLE_COLORS);
+        printf("\n");
+        printf("  Do you want to play against: (player / bot / anything to cancel)\n");
+        p_input("  > ", menu_resp, INPUT_MAX_LEN);
+
+        if (strcmp(menu_resp, "player") == 0)
+          gameplay_function(ENABLE_COLORS, 0);
+        else if (strcmp(menu_resp, "bot") == 0)
+          gameplay_function(ENABLE_COLORS, 1);
+
+        MAIN_GAME_ROOM = MAIN_MENU;
+        break;
+
+      case ABOUT:
+        print_banner(ENABLE_COLORS);
+        printf("\n");
+        printting_about(ENABLE_COLORS);
+        p_input("  > Press Enter to continue", menu_resp, INPUT_MAX_LEN);
+
+        MAIN_GAME_ROOM = MAIN_MENU;
+        break;
+
+      case QUIT:
+        game_running = 0;
+        break;
+    } 
+
+  }
+
+  printf("\n");
+  printf(" Quitting...\n");
 
   return 0;
 }
