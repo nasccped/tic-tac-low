@@ -3,6 +3,7 @@
 #include "../include/const_vars.h"
 #include "../include/visuals.h"
 #include "../include/utils.h"
+#include "../include/game/bot.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -92,13 +93,18 @@ void gameplay_function(int enable_colors, int against_bot) {
   Table           *tb     = &MAIN_TABLE       ;
   CatchPlayerMove *p_move = &CATCH_PLAYER_MOVE;
   GameMessage     *gm_msg = &MAIN_GAME_MESSAGE;
+  Bot             *bot    = &MAIN_BOT         ;
 
   char     store_input[INPUT_MAX_LEN];
   unsigned input_as_uns              ;
 
   int playing      = 1,
       player_turn  = 1,
+      bot_turn     = 0,
       table_status = tb -> check_for_victory(tb);
+
+  unsigned sleeps[] = {1, 2, 3, 4},
+           slp_len  = 4           ;
 
   gm_msg -> update(gm_msg, OK_AWAITING, "Waiting for player 1 move");
 
@@ -144,46 +150,58 @@ void gameplay_function(int enable_colors, int against_bot) {
 
         player_turn  =  1;
         table_status = -1;
+        bot_turn     =  0;
 
       } else {
+
         playing = 0;
       }
       continue;
     }
 
-    printf("\n  Choose a table cell based on numeric k.board (1..9)\n");
-    p_input("  > ", store_input, INPUT_MAX_LEN);
+    if (bot_turn) {
 
-    if (!is_num(store_input, strlen(store_input))) {
+      printf("\n  ... \n");
+      p_sleep(chose_random_uns(sleeps, slp_len));
 
-      gm_msg -> update(gm_msg         ,
+      input_as_uns = bot -> get_move_pos(bot, tb);
+
+    } else {
+
+      printf("\n  Choose a table cell based on numeric k.board (1..9)\n");
+      p_input("  > ", store_input, INPUT_MAX_LEN);
+
+      if (!is_num(store_input, strlen(store_input))) {
+
+        gm_msg -> update(gm_msg         ,
                        ERR_NON_NUMERIC,
                        player_turn == 1
                        ? "Given input is invalid (Non numeric). Player 1 turn"
                        : "Given input is invalid (Non numeric). Player 2 turn"
-      );
+        );
 
-      continue;
-    }
+        continue;
+      }
 
-    input_as_uns = atoi(store_input);
+      input_as_uns = atoi(store_input);
 
-    if (input_as_uns > 9 || input_as_uns < 1) {
+      if (input_as_uns > 9 || input_as_uns < 1) {
 
-      gm_msg -> update(gm_msg          ,
-                       ERR_OUT_OF_RANGE,
-                       player_turn == 1
-                       ? "Given input is out of range (1..9). Player 1 turn"
-                       : "Given input is out of range (1..9). Player 2 turn"
-      );
+        gm_msg -> update(gm_msg          ,
+                         ERR_OUT_OF_RANGE,
+                         player_turn == 1
+                         ? "Given input is out of range (1..9). Player 1 turn"
+                         : "Given input is out of range (1..9). Player 2 turn"
+        );
 
-      continue;
+        continue;
+      }
+
     }
 
     p_move -> get_move(p_move, player_turn, input_as_uns);
-
     
-    if (!tb -> change_on_table(tb, p_move)) {
+    if (!tb -> change_on_table(tb, p_move) && !against_bot) {
 
       gm_msg -> update(gm_msg                ,
                        ERR_CELL_ALREADY_TAKEN,
@@ -199,6 +217,17 @@ void gameplay_function(int enable_colors, int against_bot) {
 
     table_status = tb -> check_for_victory(tb);
 
+    if (!bot_turn && against_bot) {
+
+      bot_turn = 1;
+      gm_msg -> update(gm_msg     ,
+                       OK_AWAITING,
+                       "Waiting for Bot Play");
+      continue;
+    }
+
+    bot_turn = 0;
+
     gm_msg -> update(gm_msg     ,
                      OK_AWAITING,
                      player_turn == 1
@@ -207,7 +236,4 @@ void gameplay_function(int enable_colors, int against_bot) {
     );
 
   }
-
-  printf("\n  The loop has been break\n");
-
 }
