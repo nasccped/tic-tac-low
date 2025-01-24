@@ -16,6 +16,5 @@ static const char BANNER_ROW_COUNT = 7;
 void clear_terminal();
 void print_banner(unsigned);
 void print_menu();
-void print_options(unsigned, const char **);
 
 #endif

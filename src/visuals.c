@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <string.h>
-#include "../include/options.h"
 #include "../include/visuals.h"
 #include "../include/const_vars.h"
 
-void clear_terminal() { printf("\x1b[2J\x1b[H"); }
+void clear_terminal() {
+  printf("\x1b[2J\x1b[H");
+}
 
 void print_banner(unsigned enable_colors) {
 
@@ -53,16 +53,4 @@ void print_banner(unsigned enable_colors) {
   for (int i = 0; i < row_len - 10; i++)
     printf("-");
   printf("%s\n", enable_colors ? RESET_ESCAPE : "");
-}
-
-void print_options(unsigned enable_colors, const char *options[]) {
-
-  // printing each option (last option as NULL is required!)
-  for (int i = 0; strcmp(options[i], OPTION_END) != 0; i++) {
-    printf("  %s%d%s. %s\n", enable_colors ? BOLD_YELLOW_NONE : "",
-                             i + 1                                ,
-                             enable_colors ? RESET_ESCAPE : ""    ,
-                             options[i]
-    );
-  }
 }
