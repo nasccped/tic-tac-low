@@ -1,12 +1,10 @@
 #ifndef _OPTIONS_H
 #define _OPTIONS_H
 
-#ifndef _STDLIB_H
-#include <stdlib.h>
-#endif
+#define OPTION_END "![OPTION END]"
 
 static const char *MENU_OPTIONS[] = {
-  "Play", "About", "Quit", NULL
+  "Play", "About", "Quit", OPTION_END
 };
 
 
