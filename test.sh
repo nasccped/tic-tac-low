@@ -14,7 +14,7 @@
 
 # getting values from cmd line/cur dir
 all_sources=$(ls src/*.c)
-final_file="./out/tic-tac-low-test"
+final_file="./out/exe.tic-tac-low-test"
 args_count=$#
 arg=$1
 

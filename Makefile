@@ -2,7 +2,7 @@ CC=gcc
 SRC=./src
 SRC_FLS=$(wildcard $(SRC)/*.c)
 OUT=./out
-FINAL=tic-tac-low
+FINAL=exe.tic-tac-low
 
 REPO_URL=https://github.com/nasccped/tic-tac-low
 
