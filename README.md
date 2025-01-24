@@ -88,8 +88,8 @@ Let's do this together:
 4. Have fun!
   - The program isn't ready to be runned. You can type:
   ```bash
+  make clean
   make build
-  make compile
   make run
   # the commands above will instantly compile and run the program
   # but, you can also just use:
