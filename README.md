@@ -4,15 +4,10 @@ Tic Tac Low
 Attempt to make a high-performance simulation of tic-tac-toe using
 relatively low-level technology (C language was chosen 💀)!
 
----
-
-
-
-## How to Use?
+How to Use?
+-----------
 
 First things first, you'll need to check some:
-
-
 
 ### Requirements
 
@@ -35,12 +30,9 @@ First things first, you'll need to check some:
   terminal simultaneously. You can also run all commands / program
   at your own terminal (optional, of course)
 
-
-
 ### Step by Step
 
 Let's do this together:
-
 
 1. Choose some secure / easy access path at your machine 🔎
   - You can choose the path you think is best
@@ -58,13 +50,11 @@ Let's do this together:
 > For the **cd command** to work, don't forget to replace
 > `your_username` with **your actual username**! OuO
 
-
 2. Clone the remote repository 📦
   - Use git commands inside terminal to clone this repo:
   ```bash
   git clone https://github.com/nasccped/tic-tac-low
   ```
-
 
 3. Enter the new folder 🚪
   - If you're still on terminal, just type:
@@ -83,7 +73,6 @@ Let's do this together:
   #
   # you can also open the project folder by search inside IDE
   ```
-
 
 4. Have fun!
   - The program isn't ready to be runned. You can type:
