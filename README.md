@@ -98,12 +98,3 @@ Let's do this together:
   # this will display some guide content. We have a `make help` too.
   # isn't soo important but it can help you through a bug behaviour!
   ```
-
-
-
----
-
-> [!WARNING]
->
-> The project isn't finalized. I uploaded this content just to save my
-> progress remotely!
