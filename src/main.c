@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "../include/visuals.h"
 #include "../include/utils.h"
 #include "../include/options.h"
@@ -8,6 +9,8 @@ unsigned ENABLE_COLORS;
 
 // main function
 int main(int argc, char *argv[]) {
+
+  srand(time(NULL));
 
   // max args that can be received: 1
   if ((argc - 1) > 1) {

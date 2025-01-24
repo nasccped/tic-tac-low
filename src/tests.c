@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "../include/visuals.h"
 #include "../include/game/table.h"
 #include "../include/tests.h"
@@ -193,8 +194,6 @@ void PVB_GAME_FUNC() {
   gameplay_function(colors > 0 ? 1 : 0, 1);
 }
 
-#include <time.h>
-
 void RAND_FROM_ARRAY_FUNC() {
 
   unsigned int_array[] = {
@@ -211,8 +210,6 @@ void RAND_FROM_ARRAY_FUNC() {
   }
 
   printf("\n\n  Let's chose a random number from it!\n");
-
-  srand(time(NULL));
 
   int the_chosen_one;
 
