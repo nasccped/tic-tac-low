@@ -73,31 +73,8 @@ run:
 	fi                                                            ;
 	@echo                                                         ;
 
-clean:
-	@echo                                                                  ;
-	@if ! [ -d $(OUT) ]                                                    ; then \
-		$(call ptf,$(RED_ESCAPE),"$(OUT) dir was not found")                 ;      \
-		$(call ptf,$(RED_ESCAPE),"Nothing to clear")                         ;      \
-		$(call ptf,$(RED_ESCAPE),"Exiting!")                                 ;      \
-	elif ! [ -f $(OUT)/$(FINAL) ]                                          ; then \
-		$(call ptf,$(RED_ESCAPE),"Executable file was not found")            ;      \
-		$(call ptf,$(RED_ESCAPE),"Nothing to clear")                         ;      \
-		$(call ptf,$(RED_ESCAPE),"Exiting!")                                 ;      \
-	else                                                                          \
-		$(call ptf,$(YELLOW_ESCAPE),"Executable file was found")             ;      \
-		rm $(OUT)/$(FINAL)                                                   ;      \
-		if [ -f $(OUT)/$(FINAL)o ]                                           ; then \
-			$(call ptf,$(RED_ESCAPE),"Something went wrong...")                ;      \
-			$(call ptf,$(RED_ESCAPE),"Exe file could not be removed :^| ")     ;      \
-			$(call ptf,$(RED_ESCAPE),"Try removing it manualy:") 				       ;      \
-			$(call ptf,$(RED_ESCAPE),"   - cd $(OUT)")           				       ;      \
-			$(call ptf,$(RED_ESCAPE),"   - rm $(FINAL)")         				       ;      \
-			$(call ptf,$(RED_ESCAPE),"")                         				       ;      \
-			$(call ptf,$(RED_ESCAPE),"Removing via file explorer may work too");      \
-		else                                                                        \
-			$(call ptf,$(GREEN_ESCAPE),"Exe file was successfuly removed!")    ;      \
-		fi                                                                   ;      \
-	fi
-	@echo                                                                  ;
+clean: $(OUT)/$(FINAL)
+	@rm $^
+	@echo "The file is gone :^D"
 
 .PHONY: all build run clean
