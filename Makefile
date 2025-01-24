@@ -22,7 +22,9 @@ all:
 	@echo to the [$(REPO_URL)] link
 
 build: $(SRC_FLS)
-	gcc $^ -o $(OUT)/$(FINAL)
+	@echo The program is being compiled.
+	@echo Any error message will be displayed bellow!
+	@gcc $^ -o $(OUT)/$(FINAL)
 
 run: $(OUT)/$(FINAL)
 	$(OUT)/$(FINAL)
