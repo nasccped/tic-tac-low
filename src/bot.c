@@ -21,7 +21,9 @@ int get_move_pos(Bot *self, Table *tb) {
   // - check verticaly
   // - check diagonaly
 
-  int holder;
+  unsigned holder            ,
+           available_cells[9],
+           aci = 0           ;
 
   MAIN_BAC.cells = NULL;
   MAIN_BAC.len   = 0   ;
@@ -34,10 +36,24 @@ int get_move_pos(Bot *self, Table *tb) {
 
   self -> bot_smart_play(self, &MAIN_BAC, tb);
 
-  holder = chose_random_uns(MAIN_BAC.cells, MAIN_BAC.len);
+  if (MAIN_BAC.len) {
 
-  free(MAIN_BAC.cells);
-  MAIN_BAC.len = 0;
+    holder = chose_random_uns(MAIN_BAC.cells, MAIN_BAC.len);
+
+    free(MAIN_BAC.cells);
+    MAIN_BAC.len = 0;
+
+  } else {
+
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        available_cells[aci] = convert_row_col_intouns(i, j);
+        aci++;
+      }
+    }
+
+    holder = chose_random_uns(available_cells, aci);
+  }
   
   return holder;
 }
