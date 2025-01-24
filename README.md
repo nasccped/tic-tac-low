@@ -32,31 +32,13 @@ First things first, you'll need to check some:
 
 ### Step by Step
 
-Let's do this together:
-
-1. Choose some secure / easy access path at your machine 🔎
-  - You can choose the path you think is best
-  - Generally, i like to use the **Desktop path**
-  - So, you can run `cd "C:\Users\your_username\Desktop"` if you're on
-  **Windows**
-  - `cd "/home/your_username/desktop"` if you're on **Linux**
-  - You can also go to desktop path by:
-    - file explorer
-    - right click
-    - open terminal here
-
-> [!WARNING]
->
-> For the **cd command** to work, don't forget to replace
-> `your_username` with **your actual username**! OuO
-
-2. Clone the remote repository 📦
+1. Clone the remote repository 📦
   - Use git commands inside terminal to clone this repo:
   ```bash
   git clone https://github.com/nasccped/tic-tac-low
   ```
 
-3. Enter the new folder 🚪
+2. Enter the new folder 🚪
   - If you're still on terminal, just type:
   ```bash
   cd ./tic-tac-toe
@@ -74,7 +56,7 @@ Let's do this together:
   # you can also open the project folder by search inside IDE
   ```
 
-4. Have fun!
+3. Have fun!
   - The program isn't ready to be runned. You can type:
   ```bash
   make clean
