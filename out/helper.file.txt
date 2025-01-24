@@ -1,0 +1,12 @@
+Hi there! This is a helper file.
+
+Here I will explain why this file/dir exists.
+
+Well... it's quite simple actually!
+
+Make for Unix systems works well with conditionals within recipes,
+but portable Make for Windows doesn't accept it as well.
+
+So, in order to not have to do a mega operation just to make it
+portable, I will save the out directory in the repository and leave
+the compiler just with its task of compiling :^D
