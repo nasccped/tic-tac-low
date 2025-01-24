@@ -12,21 +12,14 @@ GREEN_ESCAPE=\033[1;32m
 YELLOW_ESCAPE=\033[1;33m
 BLUE_ESCAPE=\033[1;34m
 
-define ptf
-	echo "$(1) # $(RESET_ESCAPE)$(2)"
-endef
-
 all:
-	@echo                                                                            ;
-	@$(call ptf,$(BLUE_ESCAPE),"Welcome to the Tic-Tac-Low\'s Makefile!")            ;
-	@$(call ptf,$(BLUE_ESCAPE),"You can use the following options:")                 ;
-	@echo "        |> make build"                                                    ;
-	@echo "        |> make run"                                                      ;
-	@echo "        |> make clean"                                                    ;
-	@echo                                                                            ;
-	@$(call ptf,$(GREEN_ESCAPE),"You can also check the project repository by going");
-	@$(call ptf,$(GREEN_ESCAPE),"to the $(REPO_URL) link")                           ;
-	@echo                                                                            ;
+	@echo Welcome to the Tic-Tac-Low\'s Makefile!
+	@echo You can use the following options:
+	@echo . make build
+	@echo . make run
+	@echo . make clean
+	@echo You can also check the project repository by going
+	@echo to the [$(REPO_URL)] link
 
 build: $(SRC_FLS)
 	@if ! [ -d $(OUT) ]                                                                ; then \
