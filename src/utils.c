@@ -179,7 +179,7 @@ unsigned convert_row_col_intouns(unsigned row, unsigned col) {
 void p_sleep(unsigned time) {
 
   if (IS_WINDOWS) {
-    Sleep(time);
+    Sleep(time * 1000);
   } else if (IS_UNIX) {
     sleep(time);
   }
