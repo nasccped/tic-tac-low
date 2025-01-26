@@ -291,6 +291,11 @@ void SLEEP_FUNC() {
   printf("  Let's wake up!\n");
 }
 
+void TABLE_STATUS_FUNC() {
+
+  printf("  Hi there...\n");
+}
+
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
 
   element -> next = NULL;
@@ -323,6 +328,7 @@ int main_test(char *arg) {
   map -> append(map, &RAND_FROM_ARRAY);
   map -> append(map, &CONVERT_ROWCOLUNS);
   map -> append(map, &SLEEP);
+  map -> append(map, &TABLE_STATUS);
 
   LinkedHashMap *holder = map -> head;
 

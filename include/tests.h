@@ -27,6 +27,7 @@ void PVB_GAME_FUNC();
 void RAND_FROM_ARRAY_FUNC();
 void CONVERT_ROWCOLUNS_FUNC();
 void SLEEP_FUNC();
+void TABLE_STATUS_FUNC();
 
 static LinkedHashMap TABLE = {
   "table"    ,
@@ -74,6 +75,12 @@ static LinkedHashMap SLEEP = {
   "sleep"    ,
   &SLEEP_FUNC,
   &SLEEP
+};
+
+static LinkedHashMap TABLE_STATUS = {
+  "table_status"    ,
+  &TABLE_STATUS_FUNC,
+  &TABLE_STATUS
 };
 
 extern ArgMapping ARG_MAPPING;
