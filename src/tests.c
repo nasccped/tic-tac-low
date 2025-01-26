@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include "../include/const_vars.h"
+#include "../include/game/bot.h"
 #include "../include/game/player.h"
 #include "../include/game/game_literal.h"
 #include "../include/game/table.h"
@@ -293,7 +294,62 @@ void SLEEP_FUNC() {
 
 void TABLE_STATUS_FUNC() {
 
-  printf("  Hi there...\n");
+  Table *tb = &MAIN_TABLE;
+  CatchPlayerMove *cpm = &CATCH_PLAYER_MOVE;
+  Bot *bot = &MAIN_BOT;
+  int expected_result = -1;
+
+  unsigned table1[3][3] = {
+    {1, 1, 2},
+    {0, 2, 0},
+    {1, 2, 1}
+  };
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      cpm -> get_move(cpm, table1[i][j], convert_row_col_intouns(i, j));
+      tb  -> change_on_table(tb, cpm);
+    }
+  }
+
+  simple_table_print(tb);
+  printf("\n");
+
+  // Test 1
+  if (tb -> check_for_victory(tb) != expected_result) {
+
+    printf("  Test 1 - ERROR..table result returned an unexpected value:\n");
+    printf("  expecting: %d\n", expected_result);
+    printf("  received: %d\n", tb -> check_for_victory(tb));
+    return;
+  }
+
+  unsigned table2[3][3] = {
+    {1, 0, 2},
+    {2, 1, 1},
+    {1, 0, 2},
+  };
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      cpm -> get_move(cpm, table1[i][j], convert_row_col_intouns(i, j));
+      tb  -> change_on_table(tb, cpm);
+    }
+  }
+
+  cpm -> get_move(cpm, 2, bot -> get_move_pos(bot, tb));
+  tb -> change_on_table(tb, cpm);
+
+  // Test 2
+  if (tb -> check_for_victory(tb) != expected_result) {
+
+    printf("  Test 2 - ERROR..table result returned an unexpected value:\n");
+    printf("  expecting: %d\n", expected_result);
+    printf("  received: %d\n", tb -> check_for_victory(tb));
+    return;
+  }
+
+  printf("Tests passed. Everything is OK!\n");
 }
 
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
