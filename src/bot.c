@@ -289,7 +289,7 @@ int bot_avoid_lose(Bot *self, Table *tb) {
 
       // case bottom axis empty
       if (c == 0)
-        return convert_row_col_intouns(0, 2 - i);
+        return convert_row_col_intouns(2, 2 - i);
     }
   }
 
@@ -395,6 +395,22 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
         // if cur cell is empty
         if (cur_cell == 0) {
           // append to array
+          available_cells[bac -> len] = convert_row_col_intouns(i, j);
+          bac -> len++;
+        }
+      }
+    }
+  }
+
+  if (bac -> len == 0) {
+
+    for (int i = 0; i < 3; i++) {
+
+      for (int j = 0; j < 3; j++) {
+
+        cur_cell = tb -> table_literal[i][j];
+
+        if (cur_cell == 0) {
           available_cells[bac -> len] = convert_row_col_intouns(i, j);
           bac -> len++;
         }
