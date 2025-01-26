@@ -69,3 +69,11 @@ First things first, you'll need to check some:
   # this will display some guide content. We have a `make help` too.
   # isn't soo important but it can help you through a bug behaviour!
   ```
+
+> [!WARNING]
+>
+> Unfortunately, the `make clean` command does not work with GNU Make
+> for Windows OS.
+> 
+> I don't know exactly why. Maybe I'll fix this soon, but it's not a
+> fatal bug :^D
