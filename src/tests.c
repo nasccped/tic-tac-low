@@ -297,7 +297,9 @@ void TABLE_STATUS_FUNC() {
   Table *tb = &MAIN_TABLE;
   CatchPlayerMove *cpm = &CATCH_PLAYER_MOVE;
   Bot *bot = &MAIN_BOT;
-  int expected_result = -1;
+  int expected_status_result = -1;
+  unsigned expected_bot_moves[2] = {8, 2};
+  unsigned bot_move;
 
   unsigned table1[3][3] = {
     {1, 1, 2},
@@ -312,14 +314,14 @@ void TABLE_STATUS_FUNC() {
     }
   }
 
-  simple_table_print(tb);
-  printf("\n");
-
   // Test 1
-  if (tb -> check_for_victory(tb) != expected_result) {
+  if (tb -> check_for_victory(tb) != expected_status_result) {
+
+    simple_table_print(tb);
+    printf("\n");
 
     printf("  Test 1 - ERROR..table result returned an unexpected value:\n");
-    printf("  expecting: %d\n", expected_result);
+    printf("  expecting: %d\n", expected_status_result);
     printf("  received: %d\n", tb -> check_for_victory(tb));
     return;
   }
@@ -330,26 +332,34 @@ void TABLE_STATUS_FUNC() {
     {1, 0, 2},
   };
 
+  tb -> reset_table(tb);
+
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      cpm -> get_move(cpm, table1[i][j], convert_row_col_intouns(i, j));
+      cpm -> get_move(cpm, table2[i][j], convert_row_col_intouns(i, j));
       tb  -> change_on_table(tb, cpm);
     }
   }
 
-  cpm -> get_move(cpm, 2, bot -> get_move_pos(bot, tb));
-  tb -> change_on_table(tb, cpm);
+  bot_move = bot -> get_move_pos(bot, tb);
 
   // Test 2
-  if (tb -> check_for_victory(tb) != expected_result) {
+  if (!find_on_arr(expected_bot_moves, bot_move, 2)) {
 
-    printf("  Test 2 - ERROR..table result returned an unexpected value:\n");
-    printf("  expecting: %d\n", expected_result);
-    printf("  received: %d\n", tb -> check_for_victory(tb));
+    simple_table_print(tb);
+    printf("\n");
+
+    printf("  Test 2 - ERROR..bot has choosen an unexpected move:\n");
+    printf("  expecting: any value in [ ");
+    for (int i = 0; i < 2; i++)
+      printf("%d ", expected_bot_moves[i]);
+    printf("]\n");
+
+    printf("  received: %d\n", bot_move);
     return;
   }
 
-  printf("Tests passed. Everything is OK!\n");
+  printf("  Tests passed. Everything is OK!\n");
 }
 
 void append_lhm(ArgMapping *self, LinkedHashMap *element) {
