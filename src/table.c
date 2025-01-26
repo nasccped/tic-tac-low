@@ -20,6 +20,11 @@ int check_for_victory(Table *self) {
     b = self -> table_literal[i][1];
     c = self -> table_literal[i][2];
 
+    for (int j = 0; j < 3; j++) {
+      if (*abc_collec[j] == 0)
+        still_runing++;
+    }
+
     if (a == b && b == c && c != 0)
       return c;
 
@@ -38,11 +43,6 @@ int check_for_victory(Table *self) {
 
     if (a == b && b == c && c != 0)
       return c;
-
-    for (int j = 0; j < 3; j++) {
-      if (*abc_collec[j] == 0)
-        still_runing++;
-    }
   }
 
   return (still_runing) ? -1 : 0;
