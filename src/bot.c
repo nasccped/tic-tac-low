@@ -423,13 +423,58 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
 }
 
 void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
-  // TODO:
+  
+  unsigned b_val = self -> bot_val,
+           enemy = self -> bot_val == 1 ? 2 : 1,
+           cur_cell;
+
+  for (int i = 0; i < 3; i += 2) {
+    for (int j = 0; j < 3; j += 2) {
+      cur_cell = tb -> table_literal[i][j];
+      if (cur_cell == 0) {
+        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
+        bac -> len++;
+      }
+    }
+  }
 }
 
 void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
-  // TODO:
+
+  unsigned b_val = self -> bot_val,
+           enemy = self -> bot_val == 1 ? 2 : 1,
+           cur_cell;
+
+  for (int i = 0; i < 3; i++) {
+
+    for (int j = 0; j < 3; j++) {
+
+      if (j % 2 == i % 2)
+        continue;
+
+      cur_cell = tb -> table_literal[i][j];
+
+      if (cur_cell == 0) {
+        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
+        bac -> len++;
+      }
+    }
+  }
 }
 
 void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
-  // TODO:
+
+  unsigned b_val = self -> bot_val,
+           enemy = self -> bot_val == 1 ? 2 : 1,
+           cur_cell;
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      cur_cell = tb -> table_literal[i][j];
+      if (cur_cell == 0) {
+        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
+        bac -> len++;
+      }
+    }
+  }
 }
