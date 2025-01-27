@@ -14,6 +14,7 @@ typedef enum BotLookingFor {
 typedef struct _BAC {
   unsigned *cells,
             len;
+  void (*append)(struct _BAC *, unsigned);
 } BotAvailableCells;
 
 typedef struct Bot {
@@ -29,6 +30,8 @@ typedef struct Bot {
                          struct _BAC  *,
                          struct Table *);
 } Bot;
+
+void append_on_BAC(struct _BAC *, unsigned);
 
 int get_move_pos(struct Bot   *,
                  struct Table *);

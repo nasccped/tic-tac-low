@@ -25,8 +25,10 @@ int get_move_pos(Bot *self, Table *tb) {
 
   // an available cells struct (helps in randomly choices)
   BotAvailableCells *mbac = &MAIN_BAC;
+
   mbac -> cells = NULL;
-  mbac -> len   = 0   ;
+  mbac -> len = 0;
+  mbac -> append = &append_on_BAC;
 
   // if victory scenario exists (not 0), return it's position
   if ((holder = self -> bot_check_vic(self, tb)) > 0)
@@ -477,4 +479,10 @@ void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
       }
     }
   }
+}
+
+void append_on_BAC(BotAvailableCells *self, unsigned value) {
+
+  self -> cells[self -> len] = value;
+  self -> len++;
 }
