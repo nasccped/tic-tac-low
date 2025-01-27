@@ -84,7 +84,3 @@ void about_call(enum GameRoomEnum *room, int enable_colors) {
   // change room to default (menu)
   *room = MAIN_MENU;
 }
-
-void quit_call(enum GameRoomEnum *room, int enable_colors) {
-  // FIX: This will be removed (it's unnecessary)
-}
