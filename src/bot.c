@@ -92,10 +92,11 @@ int bot_check_vic(Bot *self, Table *tb) {
     b = tb -> table_literal[i][1];
     c = tb -> table_literal[i][2];
 
-    // one cell is true only if:
+    // one cell is true (valid for bot wins) only if:
     one_cell_available = (
-      how_many_in_arr(*collec, enemy, 3) == 0
-      && how_many_in_arr(*collec, b_val, 3) == 2
+      how_many_in_arr(*collec, enemy, 3) == 0    // there are 0 enemy
+                                                 // points
+      && how_many_in_arr(*collec, b_val, 3) == 2 // and 2 bot points
     );
 
     // if one cell is true:
