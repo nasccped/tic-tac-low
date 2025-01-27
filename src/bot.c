@@ -94,11 +94,9 @@ int bot_check_vic(Bot *self, Table *tb) {
 
     // one cell is true only if:
     one_cell_available = (
-      !find_on_arr(*collec, enemy, 3) // row doesn't contains enemy
-                                      // values
-      &&                              // and (&&)
-      (a + b + c) == (b_val * 2)      // sum(row cells) is equals two
-    );                                // bot vals
+      how_many_in_arr(*collec, enemy, 3) == 0
+      && how_many_in_arr(*collec, b_val, 3) == 2
+    );
 
     // if one cell is true:
     if (one_cell_available) {
@@ -124,8 +122,8 @@ int bot_check_vic(Bot *self, Table *tb) {
 
     // already explained
     one_cell_available = (
-      !find_on_arr(*collec, enemy, 3)
-      && (a + b + c) == (b_val * 2)
+      how_many_in_arr(*collec, enemy, 3) == 0
+      && how_many_in_arr(*collec, b_val, 3) == 2
     );
 
     // if one cell is true
@@ -156,8 +154,8 @@ int bot_check_vic(Bot *self, Table *tb) {
 
     // already explained
     one_cell_available = (
-      !find_on_arr(*collec, enemy, 3)
-      && (a + b + c) == (b_val * 2)
+      how_many_in_arr(*collec, enemy, 3) == 0
+      && how_many_in_arr(*collec, b_val, 3) == 2
     );
 
     // if one cell is true
@@ -219,8 +217,8 @@ int bot_avoid_lose(Bot *self, Table *tb) {
 
     // already explained in function above
     one_cell_available = (
-      !find_on_arr(*collec, b_val, 3)
-      && (a + b + c) == (enemy * 2)
+      how_many_in_arr(*collec, b_val, 3) == 0
+      && how_many_in_arr(*collec, enemy, 3) == 2
     );
 
     // if one cell empty
@@ -245,8 +243,8 @@ int bot_avoid_lose(Bot *self, Table *tb) {
 
     // explained in function above
     one_cell_available = (
-      !find_on_arr(*collec, b_val, 3)
-      && (a + b + c) == (enemy * 2)
+      how_many_in_arr(*collec, b_val, 3) == 0
+      && how_many_in_arr(*collec, enemy, 3) == 2
     );
 
     // if one cell empty
@@ -275,8 +273,8 @@ int bot_avoid_lose(Bot *self, Table *tb) {
 
     // already explained (function above)
     one_cell_available = (
-      !find_on_arr(*collec, b_val, 3)
-      && (a + b + c) == (enemy * 2)
+      how_many_in_arr(*collec, b_val, 3) == 0
+      && how_many_in_arr(*collec, enemy, 3) == 2
     );
 
     // if one cell empty
@@ -337,7 +335,7 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
   bac -> cells = available_cells;
 
   // if center is empty
-  if (tb -> table_literal[1][1] == 0) {
+  if (tb -> cell_is_available(tb, 1, 1)) {
     // add it to array and then return it
     bac -> append(bac, convert_row_col_intouns(1, 1));
     return;
