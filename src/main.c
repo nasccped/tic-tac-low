@@ -21,12 +21,12 @@ int main(int argc, char *argv[]) {
   // max args that can be received: 1
   if ((argc - 1) > 1) {
 
-    // printting unexpected arg count
+    // printing unexpected arg count
     printf("\n");
     printf("  Unexpected args being received (count: %d)\n",
            argc - 1);
 
-    // printting each arg
+    // printing each arg
     for (int i = 1; i < argc; i++) {
       printf("  . %s\n", argv[i]);
     }
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
       case ABOUT:
         print_banner(ENABLE_COLORS);
         printf("\n");
-        printting_about(ENABLE_COLORS);
+        printing_about(ENABLE_COLORS);
         p_input("  > Press Enter to continue",
                 menu_resp    ,
                 INPUT_MAX_LEN);

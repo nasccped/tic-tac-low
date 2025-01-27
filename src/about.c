@@ -8,7 +8,7 @@
  * It will receive a unsigned value (treated as a bool in ternary
  * operation) for display (or not) the program color escapes
  * */
-void printting_about(unsigned colors) {
+void printing_about(unsigned colors) {
 
   // subtitles
   printf("  Hi there. %sNasccped%s here!\n",
