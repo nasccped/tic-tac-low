@@ -161,3 +161,7 @@ void draw_table(Table *self, int enable_colors) {
   }
 
 }
+
+int cell_is_available(struct Table *self, int row, int col) {
+  return self -> table_literal[row][col] == 0;
+}
