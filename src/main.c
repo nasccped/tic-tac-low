@@ -82,9 +82,6 @@ int main(int argc, char *argv[]) {
   int game_running = 1;
       MAIN_GAME_ROOM = MAIN_MENU;
 
-  // var to store user's input
-  char menu_resp[INPUT_MAX_LEN];
-
   // program main loop
   while (game_running) {
 
@@ -96,75 +93,17 @@ int main(int argc, char *argv[]) {
 
       // if in menu
       case MAIN_MENU:
-        // print visual
-        print_banner(ENABLE_COLORS);
-        printf("\n");
-
-        print_options(ENABLE_COLORS, MENU_OPTIONS);
-        printf("\n");
-
-        // catch user's response
-        p_input("  > ", menu_resp, INPUT_MAX_LEN);
-
-        // if is valid (numeric)
-        if (is_num(menu_resp, strlen(menu_resp))) {
-
-          // change the game run based on user's response
-          switch (atoi(menu_resp)) {
-            case 1:
-              MAIN_GAME_ROOM = PLAYING;
-              break;
-
-            case 2:
-              MAIN_GAME_ROOM = ABOUT;
-              break;
-
-            case 3:
-              MAIN_GAME_ROOM = QUIT;
-              break;
-          }
-        };
-
+        menu_call(&MAIN_GAME_ROOM, ENABLE_COLORS);
         break;
 
       // if playing the game
       case PLAYING:
-
-        // print visuals
-        print_banner(ENABLE_COLORS);
-        printf("\n");
-
-        // ask for game mode (vs player / vs bot)
-        printf("  Do you want to play against: "
-               "(player / bot / anything to cancel)\n");
-
-        p_input("  > ", menu_resp, INPUT_MAX_LEN);
-
-        // call game function based on response (no call if invalid)
-        if (strcmp(menu_resp, "player") == 0)
-          gameplay_function(ENABLE_COLORS, 0);
-        else if (strcmp(menu_resp, "bot") == 0)
-          gameplay_function(ENABLE_COLORS, 1);
-
-        // change room to default (menu)
-        MAIN_GAME_ROOM = MAIN_MENU;
+        game_call(&MAIN_GAME_ROOM, ENABLE_COLORS);
         break;
 
       // if in about page
       case ABOUT:
-
-        // print visuals
-        print_banner(ENABLE_COLORS);
-        printf("\n");
-        printing_about(ENABLE_COLORS);
-
-        // wait for response (value doesn't matter)
-        p_input("  > Press Enter to continue",
-                menu_resp    ,
-                INPUT_MAX_LEN);
-
-        // cahnge room to default (menu)
-        MAIN_GAME_ROOM = MAIN_MENU;
+        about_call(&MAIN_GAME_ROOM, ENABLE_COLORS);
         break;
 
       // if quit
