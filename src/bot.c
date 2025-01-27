@@ -400,10 +400,10 @@ void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
     if (tb -> cell_is_available(tb, i, j))
       bac -> append(bac, convert_row_col_intouns(i, j));
 
-    j++;
+    j += 2;
 
-    if (j == 3) {
-      i++;
+    if (j >= 3) {
+      i += 2;
       j = 0;
     }
   }
