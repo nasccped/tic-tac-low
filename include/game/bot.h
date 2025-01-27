@@ -40,6 +40,10 @@ void bot_smart_play(struct Bot   *,
                      struct _BAC  *,
                      struct Table *);
 
+void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb);
+void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb);
+void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb);
+
 static struct Bot MAIN_BOT = {
   2              ,
   &get_move_pos  ,

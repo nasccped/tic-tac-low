@@ -421,3 +421,15 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
   // update bac pointer to store the array
   bac -> cells = available_cells;
 }
+
+void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
+  // TODO:
+}
+
+void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
+  // TODO:
+}
+
+void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
+  // TODO:
+}
