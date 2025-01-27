@@ -71,7 +71,7 @@ int change_on_table(Table *self, CatchPlayerMove *catch_pmove) {
   if (val < 1 || val > 2)
     return 0;
 
-  if (self -> table_literal[row][col] != 0)
+  if (!(self -> cell_is_available(self, row, col)))
     return 0;
 
   self -> table_literal[row][col] = val;
