@@ -2,11 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "../include/about.h"
 #include "../include/const_vars.h"
-#include "../include/game/game_literal.h"
 #include "../include/game/rooms.h"
-#include "../include/options.h"
 #include "../include/tests.h"
 #include "../include/utils.h"
 #include "../include/visuals.h"
