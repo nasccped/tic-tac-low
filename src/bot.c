@@ -353,75 +353,23 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
   unsigned cur_cell;
 
   // if enemy doing diagonal plays >:^(
-  int tl_dr_play = (tl == enemy && dr == enemy), // tl to dr
-      dl_tr_play = (dl == enemy && tr == enemy), // dl to tr
-
-      mid_hon_ver;   // to catch if are in mid cell iteration
-                     // (horizontaly or verticaly)
+  int diagonal_play = (tl == enemy && dr == enemy)     // tl to dr
+                      || (dl == enemy && tr == enemy); // dl to tr
 
   // if diagonal play
-  if (tl_dr_play || dl_tr_play) {
+  if (diagonal_play)
+    catch_side_cells(self, bac, tb);
 
-    // row iteration
-    for (int i = 0; i < 3; i++) {
+  if (bac -> len)
+    return;
 
-      // column iteration
-      for (int j = 0; j < 3; j++) {
+  // else no diagonal play
+  catch_axis_cells(self, bac, tb);
 
-        cur_cell = tb -> table_literal[i][j]; // store current cell
-        
-        mid_hon_ver = (i == 1 || j == 1); // store bool as int if
-                                          // you're a mid cell
+  if (bac -> len)
+    return;
 
-        // if current cell is empty and you're at mid row/col
-        if (cur_cell == 0 && mid_hon_ver) {
-
-          // append pos to the array
-          available_cells[bac -> len] = convert_row_col_intouns(i, j);
-          bac -> len++;
-        }
-      }
-    }
-
-  // else (no diagonal play)
-  } else {
-
-    // row iteration
-    for (int i = 0; i < 3; i += 2) {
-      
-      // column iteration
-      for (int j = 0; j < 3; j += 2) {
-
-        cur_cell = tb -> table_literal[i][j]; // catch cur cell
-
-        // if cur cell is empty
-        if (cur_cell == 0) {
-          // append to array
-          available_cells[bac -> len] = convert_row_col_intouns(i, j);
-          bac -> len++;
-        }
-      }
-    }
-  }
-
-  if (bac -> len == 0) {
-
-    for (int i = 0; i < 3; i++) {
-
-      for (int j = 0; j < 3; j++) {
-
-        cur_cell = tb -> table_literal[i][j];
-
-        if (cur_cell == 0) {
-          available_cells[bac -> len] = convert_row_col_intouns(i, j);
-          bac -> len++;
-        }
-      }
-    }
-  }
-
-  // update bac pointer to store the array
-  bac -> cells = available_cells;
+  catch_all_cells(self, bac, tb);
 }
 
 void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
