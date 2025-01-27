@@ -11,11 +11,13 @@
 #include "../include/utils.h"
 #include "../include/visuals.h"
 
+// catching enable colors from <const_vars> header
 unsigned ENABLE_COLORS;
 
 // main function
 int main(int argc, char *argv[]) {
 
+  // initiate the random trigger
   srand(time(NULL));
 
   // max args that can be received: 1
@@ -74,30 +76,40 @@ int main(int argc, char *argv[]) {
   }
 
   // update var (only > -1 values)
-  ENABLE_COLORS  = color_trigger;
+  ENABLE_COLORS = color_trigger;
 
+  // loop variable default values
   int game_running = 1;
-  MAIN_GAME_ROOM = MAIN_MENU;
+      MAIN_GAME_ROOM = MAIN_MENU;
 
+  // var to store user's input
   char menu_resp[INPUT_MAX_LEN];
 
+  // program main loop
   while (game_running) {
 
+    // clear terminal
     clear_terminal();
 
+    // especific room run
     switch (MAIN_GAME_ROOM) {
 
+      // if in menu
       case MAIN_MENU:
+        // print visual
         print_banner(ENABLE_COLORS);
         printf("\n");
 
         print_options(ENABLE_COLORS, MENU_OPTIONS);
         printf("\n");
 
+        // catch user's response
         p_input("  > ", menu_resp, INPUT_MAX_LEN);
 
+        // if is valid (numeric)
         if (is_num(menu_resp, strlen(menu_resp))) {
 
+          // change the game run based on user's response
           switch (atoi(menu_resp)) {
             case 1:
               MAIN_GAME_ROOM = PLAYING;
@@ -115,41 +127,56 @@ int main(int argc, char *argv[]) {
 
         break;
 
+      // if playing the game
       case PLAYING:
+
+        // print visuals
         print_banner(ENABLE_COLORS);
         printf("\n");
 
+        // ask for game mode (vs player / vs bot)
         printf("  Do you want to play against: "
                "(player / bot / anything to cancel)\n");
 
         p_input("  > ", menu_resp, INPUT_MAX_LEN);
 
+        // call game function based on response (no call if invalid)
         if (strcmp(menu_resp, "player") == 0)
           gameplay_function(ENABLE_COLORS, 0);
         else if (strcmp(menu_resp, "bot") == 0)
           gameplay_function(ENABLE_COLORS, 1);
 
+        // change room to default (menu)
         MAIN_GAME_ROOM = MAIN_MENU;
         break;
 
+      // if in about page
       case ABOUT:
+
+        // print visuals
         print_banner(ENABLE_COLORS);
         printf("\n");
         printing_about(ENABLE_COLORS);
+
+        // wait for response (value doesn't matter)
         p_input("  > Press Enter to continue",
                 menu_resp    ,
                 INPUT_MAX_LEN);
 
+        // cahnge room to default (menu)
         MAIN_GAME_ROOM = MAIN_MENU;
         break;
 
+      // if quit
       case QUIT:
+
+        // update loop trigger
         game_running = 0;
         break;
     } 
-
   }
 
+  // printing bye text
   printf("\n");
   printf(" Quitting...\n");
   printf("\n");
