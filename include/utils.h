@@ -11,6 +11,7 @@ int is_num(char *, unsigned);
 int is_alpha_str(char *);
 int chose_random_uns(unsigned [], unsigned);
 unsigned find_on_arr(unsigned [], unsigned, unsigned);
+unsigned how_many_in_arr(unsigned [], unsigned, unsigned);
 unsigned convert_row_col_intouns(unsigned, unsigned);
 void p_sleep(unsigned);
 
