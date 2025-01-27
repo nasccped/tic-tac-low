@@ -334,12 +334,12 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
     (unsigned *)malloc(sizeof(unsigned) * 9)
   );
 
+  bac -> cells = available_cells;
+
   // if center is empty
   if (tb -> table_literal[1][1] == 0) {
     // add it to array and then return it
-    available_cells[0] = convert_row_col_intouns(1, 1);
-    bac -> cells = available_cells;
-    bac -> len = 1;
+    bac -> append(bac, convert_row_col_intouns(1, 1));
     return;
   }
 
@@ -434,8 +434,7 @@ void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
     for (int j = 0; j < 3; j += 2) {
       cur_cell = tb -> table_literal[i][j];
       if (cur_cell == 0) {
-        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
-        bac -> len++;
+        bac -> append(bac, convert_row_col_intouns(i, j));
       }
     }
   }
@@ -456,10 +455,9 @@ void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
 
       cur_cell = tb -> table_literal[i][j];
 
-      if (cur_cell == 0) {
-        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
-        bac -> len++;
-      }
+      if (cur_cell == 0)
+        bac -> append(bac, convert_row_col_intouns(i, j));
+
     }
   }
 }
@@ -473,10 +471,8 @@ void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       cur_cell = tb -> table_literal[i][j];
-      if (cur_cell == 0) {
-        bac -> cells[bac -> len] = convert_row_col_intouns(i, j);
-        bac -> len++;
-      }
+      if (cur_cell == 0)
+        bac -> append(bac, convert_row_col_intouns(i, j));
     }
   }
 }
