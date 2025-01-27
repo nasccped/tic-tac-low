@@ -382,8 +382,27 @@ void append_lhm(ArgMapping *self, LinkedHashMap *element) {
   self -> count++;
 }
 
-int main_test(char *arg) {
+int main_test(char *args[], int len) {
   
+  if (len > 2) {
+    // printing unexpected arg count
+    printf("\n");
+    printf("  Unexpected args being received (count: %d)\n", len - 1);
+
+    // max argc count hint
+    printf("\n");
+    printf("  Maximum expected: 1\n");
+    printf("\n");
+
+    // printing each arg
+    for (int i = 1; i < len; i++) {
+      printf("  . %s\n", args[i]);
+    }
+
+    return 1;
+  }
+
+  char *test_call = args[1];
   ArgMapping *map = &ARG_MAPPING;
 
   map -> append(map, &TABLE);
@@ -402,17 +421,16 @@ int main_test(char *arg) {
 
   while (holder != NULL) {
 
-    if (strcmp(arg, holder -> arg) == 0) {
-      holder->func();
+    if (strcmp(test_call, holder -> arg) == 0) {
+      holder -> func();
       return 0;
     }
-
     holder = holder -> next;
   }
 
   holder = map -> head;
 
-  printf("  The given arg (%s) could not be found!\n", arg);
+  printf("  The given arg (%s) could not be found!\n", test_call);
   printf("  Available args are: \n");
 
   for (int i = 0; i < (map -> count); i++) {

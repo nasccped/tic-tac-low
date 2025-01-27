@@ -1,7 +1,7 @@
 #ifndef _TESTS_H
 #define _TESTS_H
 
-int main_test(char *);
+int main_test(char *[], int);
 
 typedef struct LinkedHashMap {
   const char *arg;
