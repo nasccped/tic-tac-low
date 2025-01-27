@@ -431,8 +431,16 @@ void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
 
     // if i and j are both odd / not odd (means axis/center), skip
     // iteration
-    if (j % 2 == i % 2)
+    if (j % 2 == i % 2) {
+
+      j++;
+
+      if (j == 3) {
+        i++;
+        j = 0;
+      }
       continue;
+    }
 
     if (tb -> cell_is_available(tb, i, j))
       bac -> append(bac, convert_row_col_intouns(i, j));
