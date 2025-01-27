@@ -357,22 +357,41 @@ void bot_smart_play(Bot *self, BotAvailableCells *bac, Table *tb) {
 
   // if diagonal play
   if (diagonal_play)
+    // catch all side celss (not axis/center)
     catch_side_cells(self, bac, tb);
 
+  // if at least one cell was captured, stop func
   if (bac -> len)
     return;
 
-  // else no diagonal play
+  // else (no diagonal play)
   catch_axis_cells(self, bac, tb);
 
+  // if at least one cell was captured, stop func
   if (bac -> len)
     return;
 
+  // else (no axis)
   catch_all_cells(self, bac, tb);
 }
 
+/*
+ * A function to catch all available cells at table axis
+ *
+ * Input:
+ *    - Bot struct pointer (self)
+ *    - BotAvailableCells struct pointer (bac)
+ *    - Table struct pointer (tb) for analysis
+ *
+ * Output:
+ *    Nothing! It's a void funtion. It will only catch the table's
+ *    axis and store it into 'BAC' struct. In the future, one of
+ *    these stored values may be chosen randomly.
+ * */
 void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
 
+  // a more idiomatic way to do a 2D array loop (while loop +
+  // 2 extern variables)
   int i = 0,
       j = 0;
 
@@ -390,13 +409,28 @@ void catch_axis_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
   }
 }
 
+/*
+ * A function to catch all available cells at table sides
+ * (verticaly + horizontaly)
+ *
+ * Input:
+ *    - Bot struct (self)
+ *    - BotAvailableCells struct pointer (bac)
+ *    - Table struct pointer (tb) for analysis
+ *
+ * Output:
+ *    Same as above
+ * */
 void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
 
+  // already explained at function above
   int i = 0,
       j = 0;
 
   while (i < 3) {
 
+    // if i and j are both odd / not odd (means axis/center), skip
+    // iteration
     if (j % 2 == i % 2)
       continue;
 
@@ -412,8 +446,20 @@ void catch_side_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
   }
 }
 
+/*
+ * A function to catch all available cells at table (no rules)
+ *
+ * Input:
+ *    - Bot struct (self)
+ *    - BotAvailableCells struct pointer (bac)
+ *    - Table struct pointer (tb) for analysis
+ *
+ * Output:
+ *    Same as above
+ * */
 void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
 
+  // already explained
   int i = 0,
       j = 0;
 
@@ -431,8 +477,19 @@ void catch_all_cells(Bot *self, BotAvailableCells *bac, Table *tb) {
   }
 }
 
+/*
+ * A BAC struct feature (append a value on the array)
+ *
+ * Input:
+ *    - Bac struct pointer (self)
+ *    - unsinged number (value)
+ *
+ * Output:
+ *    Nothing. Just insert the value on the struct variable
+ * */
 void append_on_BAC(BotAvailableCells *self, unsigned value) {
 
+  // change val + increase length
   self -> cells[self -> len] = value;
   self -> len++;
 }
