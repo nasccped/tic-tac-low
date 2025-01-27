@@ -9,5 +9,9 @@ typedef enum GameRoomEnum {
 } GameRoom;
 
 static GameRoom MAIN_GAME_ROOM;
+void menu_call(enum GameRoomEnum *, int);
+void game_call(enum GameRoomEnum *, int);
+void about_call(enum GameRoomEnum *, int);
+void quit_call(enum GameRoomEnum *, int);
 
 #endif
