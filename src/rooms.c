@@ -9,8 +9,16 @@
 #include "../include/utils.h"
 #include "../include/visuals.h"
 
+/*
+ * A function to display / run the menu visuals and logics
+ *
+ * Input:
+ *    - GameRoomEnum enum pointer (room) so it can be updated
+ *    - int value (enable_colors) for escape trigger
+ * */
 void menu_call(enum GameRoomEnum *room, int enable_colors) {
 
+  // variable to store the user's response
   char menu_resp[INPUT_MAX_LEN];
 
   // print visual
@@ -26,7 +34,7 @@ void menu_call(enum GameRoomEnum *room, int enable_colors) {
   // if is valid (numeric)
   if (is_num(menu_resp, strlen(menu_resp))) {
 
-    // change the game run based on user's response
+    // change the game run based on its values
     switch (atoi(menu_resp)) {
       case 1:
         *room = PLAYING;
@@ -43,8 +51,16 @@ void menu_call(enum GameRoomEnum *room, int enable_colors) {
   };
 }
 
+/*
+ * A function to display / run the gameplay function
+ *
+ * Input:
+ *    - GameRoomEnum enum pointer (room) so it can be updated
+ *    - int value (enable_colors) for escape trigger
+ * */
 void game_call(enum GameRoomEnum *room, int enable_colors) {
 
+  // store user's response
   char menu_resp[INPUT_MAX_LEN];
 
   // print visuals
@@ -67,8 +83,15 @@ void game_call(enum GameRoomEnum *room, int enable_colors) {
   *room = MAIN_MENU;
 }
 
+/*
+ * A function to display / run the gameplay function
+ *
+ * Input:
+ *    - GameRoomEnum enum pointer (room) so it can be updated
+ *    - int value (enable_colors) for escape trigger
+ * */
 void about_call(enum GameRoomEnum *room, int enable_colors) {
-
+  // store user's response
   char menu_resp[INPUT_MAX_LEN];
 
   // print visuals
