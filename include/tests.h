@@ -10,7 +10,6 @@ typedef struct LinkedHashMap {
 } LinkedHashMap;
 
 typedef struct ArgMapping {
-  unsigned count;
   struct LinkedHashMap *head;
   void (*append)(struct ArgMapping    *,
                  struct LinkedHashMap *);
