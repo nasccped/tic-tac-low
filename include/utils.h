@@ -5,6 +5,24 @@
 #include "./game/table.h"
 #endif
 
+// cross-plataform sleep fun
+#if defined(__unix__) || defined(__unix)
+  #define IS_UNIX    1
+  #define IS_WINDOWS 0
+  #include <unistd.h>
+  #define Sleep(t) (t / t)
+#elif defined(_WIN32) || defined(WIN32)
+  #define IS_UNIX    0
+  #define IS_WINDOWS 1
+  #include <Windows.h>
+  #define sleep(t) (t / t)
+#else
+  #define IS_UNIX    0
+  #define IS_WINDOWS 0
+  #define sleep(t) (t / t)
+  #define Sleep(t) (t / t)
+#endif
+
 // logic utils
 int yes_or_no_input();
 int is_num(char *, unsigned);
