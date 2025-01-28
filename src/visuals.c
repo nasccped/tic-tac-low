@@ -2,18 +2,24 @@
 #include "../include/visuals.h"
 #include "../include/const_vars.h"
 
+// Self explanatory
 void clear_terminal() {
   printf("\x1b[2J\x1b[H");
 }
 
+/*
+ * Self explanatory too
+ *
+ * Input:
+ *    - unsigned val (enable_colors) for color escape triggers
+ * */
 void print_banner(unsigned enable_colors) {
 
   unsigned row_len = (
     sizeof(BANNER_ART[0]) / sizeof(BANNER_ART[0][0])
   );
 
-  char cur;
-
+  // printing banner top border
   printf("\n");
   printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
 
@@ -22,14 +28,21 @@ void print_banner(unsigned enable_colors) {
 
   printf("%s\n", enable_colors ? RESET_ESCAPE : "");
 
+  char cur;
+
   for (int i = 0; i < BANNER_ROW_COUNT; i++) {
 
+    // left padding
     printf("  ");
 
+    // iterate through each banner array element
     for (int j = 0; j < row_len; j++) {
 
+      // update the holder
       cur = BANNER_ART[i][j];
 
+      // print color escape based on cur value (or, print the self
+      // char)
       switch (cur) {
 
         case '1':
@@ -53,6 +66,7 @@ void print_banner(unsigned enable_colors) {
 
   printf("%s", enable_colors ? RESET_ESCAPE : "");
 
+  // printing banner bottom border
   printf("\n");
   printf("  %s", enable_colors ? BOLD_WHITE_NONE : "");
 
