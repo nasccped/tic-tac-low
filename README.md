@@ -77,3 +77,9 @@ First things first, you'll need to check some:
 > 
 > I don't know exactly why. Maybe I'll fix this soon, but it's not a
 > fatal bug :^D
+>
+> ---
+>
+> Also, the GitHub repository is the same for both operating systems
+> (Windows/Unix), but for some reason, when playing against a bot, it
+> may make wrong moves (Windows only). This won't be fixed
