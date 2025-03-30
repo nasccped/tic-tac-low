@@ -1,16 +1,12 @@
 CC=gcc
+DC=docker
 SRC=./src
 SRC_FLS=$(wildcard $(SRC)/*.c)
 OUT=./out
-FINAL=exe.tic-tac-low
+DOCKER_NAMING=tic-tac-low
+FINAL=tic-tac-low.exe
 
 REPO_URL=https://github.com/nasccped/tic-tac-low
-
-RESET_ESCAPE=\033[0m
-RED_ESCAPE=\033[1;31m
-GREEN_ESCAPE=\033[1;32m
-YELLOW_ESCAPE=\033[1;33m
-BLUE_ESCAPE=\033[1;34m
 
 all:
 	@echo Welcome to the Tic-Tac-Low\'s Makefile!
@@ -20,6 +16,16 @@ all:
 	@echo . make clean
 	@echo You can also check the project repository by going
 	@echo to the [$(REPO_URL)] link
+	@echo --------------------------------------------------
+	@echo Now, you can also build and run the program
+	@echo through a docker container. Highly recommended!
+	@echo Use the following commands:
+	@echo . make buildimage
+	@echo .      to build the docker image
+	@echo . make runimage
+	@echo .      to run the docker container
+	@echo . make cleanimage
+	@echo .      to delete the container + image
 
 build: $(SRC_FLS)
 	@echo The program is being compiled.
@@ -33,4 +39,14 @@ clean: $(OUT)/$(FINAL)
 	@rm $^
 	@echo "The file is gone :^D"
 
-.PHONY: all build run clean
+buildimage:
+	$(DC) build -t $(DOCKER_NAMING) .
+
+runimage:
+	$(DC) run -it --name $(DOCKER_NAMING)-container $(DOCKER_NAMING)
+
+cleanimage:
+	$(DC) rm $(DOCKER_NAMING)-container
+	$(DC) rmi $(DOCKER_NAMING)
+
+.PHONY: all build run clean buildimage runimage cleanimage
