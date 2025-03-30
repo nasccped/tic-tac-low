@@ -13,7 +13,7 @@ Here we have two different ways to use this, project:
      compilation/execution bugs
 
 There's a different requirement list and steps for each one of the
-ways that you can use the project, use the following `\<details\>`
+ways that you can use the project, use the following `<details>`
 tag to get more info!
 
 <details>
