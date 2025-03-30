@@ -7,79 +7,94 @@ relatively low-level technology (C language was chosen 💀)!
 How to Use?
 -----------
 
-First things first, you'll need to check some:
+Here we have two different ways to use this, project:
+  1. Using **Docker** and **GNU Make** _(Extremely Recommended)_
+  2. Using your own computer where can result in
+     compilation/execution bugs
+
+There's a different requirement list and steps for each one of the
+ways that you can use the project, use the following `\<details\>`
+tag to get more info!
+
+<details>
+<summary>Docker 🐳 + Make 🐐</summary>
 
 ### Requirements
 
-- [**gcc 🤖**](https://gcc.gnu.org/)
+- [Git](https://git-scm.com/) _(mandatory)_
+- [Docker](https://www.docker.com) _(mandatory)_
+- [GNU Make](https://www.gnu.org/software/make/) _(optional)_
 
-  This will compile the C files on which the program was built
+### Steps
 
-- [**make 🐐**](https://www.gnu.org/software/make/manual/make.html)
-
-  Compile-like tool needed to run _Makefiles_ found within the project
-
-- [**git 🏷️**](https://git-scm.com/)
-
-  One of the most famous version control system. Needed to run
-  `git clone ...`
-
-- [**IDE 🖥️**](https://www.redhat.com/en/topics/middleware/what-is-ide) _(optional)_
-
-  Some software that can handle source files, directory-tree and output
-  terminal simultaneously. You can also run all commands / program
-  at your own terminal (optional, of course)
-
-### Step by Step
-
-1. Clone the remote repository 📦
-  - Use git commands inside terminal to clone this repo:
-  ```bash
+1. Clone the repository + remove git folder:
+  ```sh
   git clone https://github.com/nasccped/tic-tac-low
+  cd tic-tac-low
+  rm -rf .git # use `Remove-Item -Recurse -Force .git` if you're at Windows PowerShell
+  ```
+2. Within the cloned repo, build the image using the make command:
+  ```sh
+  make buildimage
+  # if you don't have make, try using: `docker build -t tic-tac-low .`
+  ```
+3. Run the container from the build image:
+  ```sh
+  make runimage
+  # if you don't have make, try using: `docker run -it --name tic-tac-low-container tic-tac-low`
+  ```
+3. Have fun! If you also want to remove the created image/container, use:
+  ```sh
+  make cleanimage
+  # if you don't have make, try using:
+  # `docker rm tic-tac-low-container to remove the container`
+  # `docker rmi tic-tac-low to remove the image`
   ```
 
-2. Enter the new folder 🚪
-  - If you're still on terminal, just type:
-  ```bash
-  cd ./tic-tac-toe
-  ```
-  - If you prefer to use some IDE, type:
-  ```bash
-  # enters the folder
-  cd ./tic-tac-toe
+</details>
 
-  # open current dir within IDE by command
-  # 'code .' if using vs code
-  # 'nvim .' if using neovim
-  # etc...
-  #
-  # you can also open the project folder by search inside IDE
-  ```
+<details>
+<summary>On your computer 👨‍💻👩‍💻</summary>
 
-3. Have fun!
-  - The program isn't ready to be runned. You can type:
-  ```bash
-  make clean
+### Requirements
+
+- [Git](https://git-scm.com/) _(mandatory)_
+- [GNU Make](https://www.gnu.org/software/make/) _(mandatory)_
+- [GCC](https://gcc.gnu.org/) _(mandatory)_
+
+The dependencies instalation can difer from OS to OS, so I won't
+specify how to get it. Use your **package manager**, **winget**, ...
+
+### Steps
+
+1. Clone the repository + remove git folder:
+  ```sh
+  git clone https://github.com/nasccped/tic-tac-low
+  cd tic-tac-low
+  rm -rf .git # use `Remove-Item -Recurse -Force .git` if you're at Windows PowerShell
+  ```
+2. Within the cloned repo, compile the program using the make command:
+  ```sh
   make build
-  make run
-  # the commands above will instantly compile and run the program
-  # but, you can also just use:
-
-  make
-  # this will display some guide content. We have a `make help` too.
-  # isn't soo important but it can help you through a bug behaviour!
   ```
+3. Run the compiled program:
+  ```sh
+  make run
+  ```
+3. Have fun! If you also want to remove the created binaires, use:
+  ```sh
+  make clean
+  ```
+</details>
 
-> [!WARNING]
+> [!CAUTION]
 >
-> Unfortunately, the `make clean` command does not work with GNU Make
-> for Windows OS.
-> 
-> I don't know exactly why. Maybe I'll fix this soon, but it's not a
-> fatal bug :^D
+> Using Docker is Highly recommended. It's the only way I can
+> guarantee it will work on your machine the same way it works on
+> mine.
 >
-> ---
->
-> Also, the GitHub repository is the same for both operating systems
-> (Windows/Unix), but for some reason, when playing against a bot, it
-> may make wrong moves (Windows only). This won't be fixed
+> Also, Windows OS is having trouble with the `make clean` command +
+> program control flux during runtime! Basically, Running the program
+> on Windows can differ from running it on a UNIX like OS, even if
+> there's no errors durring compilations. I don't know how to fix it
+> and I don't intend. Just learn Docker 🫡
