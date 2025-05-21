@@ -81,7 +81,7 @@ specify how to get it. Use your **package manager**, **winget**, ...
   ```sh
   make run
   ```
-3. Have fun! If you also want to remove the created binaires, use:
+4. Have fun! If you also want to remove the created binaires, use:
   ```sh
   make clean
   ```
